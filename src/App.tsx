@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Prose } from "./components/ui/prose";
-import "./app.css";
+// import "./app.css";
 
 const html = String.raw;
 
