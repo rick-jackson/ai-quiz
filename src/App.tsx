@@ -12,7 +12,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Prose } from "./components/ui/prose";
-// import "./app.css";
+import QuizPage from "./pages/quiz";
+import { BrowserRouter } from "react-router-dom";
 
 const html = String.raw;
 
@@ -41,8 +42,12 @@ function App() {
       setLoading(false);
     }
   };
-
   if (loading) return <Spinner w={200} h={200} m="auto" />;
+  return (
+    <BrowserRouter>
+      <QuizPage />
+    </BrowserRouter>
+  );
 
   return (
     <Container maxW={500}>
