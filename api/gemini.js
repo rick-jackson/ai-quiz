@@ -18,7 +18,36 @@ export default async function handler(req, res) {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `Згенеруй 10 запитань з відповідями для квіза на тему: ${prompt}.
+Формат відповіді – тільки масив об'єктів без додаткового тексту.
+Приклад обєкта:
+[{
+  "id": 1,
+  "question": "Який HTTP-метод зазвичай використовується для отримання даних із сервера?",
+  "title": "Робота з API",
+  "answers": [
+    { "id": 1, "text": "<strong>GET</strong>", "isCorrect": true },
+    { "id": 2, "text": "<strong>POST</strong>", "isCorrect": false },
+    { "id": 3, "text": "<strong>DELETE</strong>", "isCorrect": false },
+    { "id": 4, "text": "<strong>PATCH</strong>", "isCorrect": false },
+  ]
+}];
+Якщо створити запитання за вказаною темою неможливо, поверни тільки цей рядок:
+"Некоректний запит."
+Жодного іншого тексту у відповіді не має бути!
+можна використовувати html теги, що текст виглядав привабливішим.
+Старайся, щоб відповіді були приблизно однієї довжини
+`,
+                },
+              ],
+            },
+          ],
+        }),
       }
     );
 
@@ -27,7 +56,14 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    res.json(data);
+    res.json(
+      JSON.parse(
+        data?.candidates[0].content.parts[0].text.replace(
+          /```json\n|\n```/g,
+          ""
+        )
+      )
+    );
   } catch (error) {
     res.status(500).json({ error: "Server error", details: error.message });
   }

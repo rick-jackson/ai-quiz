@@ -1,10 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { ChakraProvider } from "@chakra-ui/react";
+import App from "./App.tsx";
+import { ColorModeProvider } from "./components/ui/color-mode.tsx";
+import { system } from "./components/ui/theme.ts";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <ChakraProvider value={system}>
+      <ColorModeProvider>
+        <App />
+      </ColorModeProvider>
+    </ChakraProvider>
+  </StrictMode>
+);
