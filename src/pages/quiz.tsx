@@ -26,7 +26,7 @@ const QuizPage: React.FC = () => {
   }, []);
 
   return (
-    <Box display="flex" h="100%" bg="bg.primary">
+    <Box display="flex" h="100%" w="100%" bg="bg.primary">
       {loading ? <Loader /> : error ? error : <Quiz quiz={quiz} />}
     </Box>
   );
