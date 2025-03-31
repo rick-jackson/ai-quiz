@@ -6,7 +6,7 @@ const html = String.raw;
 
 type AnswersProps = {
   answers: Quiz["answers"];
-  onSelectAnswer: (answerId: number) => void;
+  onSelectAnswer: (answerId: number, isCorrect: boolean) => void;
   selectedAnswerId: number;
 };
 
@@ -29,7 +29,7 @@ const Answers: React.FC<AnswersProps> = ({
             {...(selectedAnswerId === answer.id && { borderColor: "red" })}
             {...(!!selectedAnswerId &&
               answer.isCorrect && { borderColor: "green" })}
-            onClick={() => onSelectAnswer(answer.id)}
+            onClick={() => onSelectAnswer(answer.id, answer.isCorrect)}
           >
             <Prose
               whiteSpace="normal !important"

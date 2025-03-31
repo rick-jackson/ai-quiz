@@ -3,12 +3,21 @@ import {
   Box,
   Button,
   Container,
-  Flex,
   ProgressCircle,
   Text,
 } from "@chakra-ui/react";
 
-const Result: React.FC = () => {
+type ResultProps = {
+  allQuestionsCount: number;
+  correctUserAnswers: number;
+  onResetQuiz: () => void;
+};
+
+const Result: React.FC<ResultProps> = ({
+  allQuestionsCount,
+  correctUserAnswers,
+  onResetQuiz,
+}) => {
   return (
     <Container
       m="auto"
@@ -39,21 +48,25 @@ const Result: React.FC = () => {
           </ProgressCircle.Circle>
           <AbsoluteCenter>
             <Text as="span" fontSize={10}>
-              5/10
+              {correctUserAnswers}/{allQuestionsCount}
             </Text>
           </AbsoluteCenter>
         </ProgressCircle.Root>
       </Box>
 
-      <Text>You got 80% of the answers correct. Congratulations</Text>
-
-      <Flex flexDir="column" gap={2}>
-        {["Пройти знову", "Оновити запитання", "Змінити тему"].map((label) => (
-          <Button key={label} size="xl" variant="surface">
-            {label}
-          </Button>
-        ))}
-      </Flex>
+      <Text>
+        You got {(correctUserAnswers / allQuestionsCount) * 100}% of the answers
+        correct. Congratulations!
+      </Text>
+      <Button size="xl" variant="surface" onClick={onResetQuiz}>
+        Пройти знову
+      </Button>
+      <Button size="xl" variant="surface">
+        Оновити запитання
+      </Button>
+      <Button size="xl" variant="surface">
+        Змінити тему
+      </Button>
     </Container>
   );
 };

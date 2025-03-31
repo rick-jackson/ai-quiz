@@ -13,7 +13,9 @@ type QuizProps = {
 const Quiz: React.FC<QuizProps> = ({ quiz }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showResult, setShowResult] = useState<boolean>(false);
-  const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
+  const [userAnswers, setUserAnswers] = useState<
+    Record<number, { id: number; isCorrect: boolean }>
+  >({});
   const [currentQuestionId, setCurrentQuestionId] = useState<number>(
     quiz[0].id
   );
@@ -38,13 +40,31 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
     setCurrentQuestionId((prev) => prev - 1);
   };
 
-  const handleSelectAnswer = (answerId: number) => {
+  const handleSelectAnswer = (answerId: number, isCorrect: boolean) => {
     if (!userAnswers[currentQuestionId]) {
-      setUserAnswers((prev) => ({ ...prev, [currentQuestionId]: answerId }));
+      setUserAnswers((prev) => ({
+        ...prev,
+        [currentQuestionId]: { id: answerId, isCorrect },
+      }));
     }
   };
 
-  if (!showResult) return <Result />;
+  const handleResetQuiz = () => {
+    setUserAnswers({});
+    setShowResult(false);
+    setCurrentQuestionId(1);
+  };
+
+  if (showResult)
+    return (
+      <Result
+        onResetQuiz={handleResetQuiz}
+        allQuestionsCount={quiz.length}
+        correctUserAnswers={
+          Object.values(userAnswers).filter((answer) => answer.isCorrect).length
+        }
+      />
+    );
 
   return (
     <Container
@@ -67,7 +87,7 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
         <Answers
           answers={currentQuestion!.answers}
           onSelectAnswer={handleSelectAnswer}
-          selectedAnswerId={userAnswers[currentQuestionId]}
+          selectedAnswerId={userAnswers[currentQuestionId]?.id}
         />
       </Box>
       <Button
