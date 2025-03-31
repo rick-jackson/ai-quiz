@@ -2,4 +2,4 @@
 
 import { chakra } from "@chakra-ui/react";
 
-export const Prose = chakra("div", {});
+export const Prose = chakra("p", {});

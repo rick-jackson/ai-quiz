@@ -1,23 +1,44 @@
-import { Box, Progress, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Progress, Text } from "@chakra-ui/react";
+import { LuArrowLeft } from "react-icons/lu";
 
 type ToolbarProps = {
-  currentQuizId: number;
+  currentQuestionId: number;
+  onPrevQuestion: () => void;
+  isFirstQuestion: boolean;
 };
 
-const Toolbar: React.FC<ToolbarProps> = ({ currentQuizId }) => {
+const Toolbar: React.FC<ToolbarProps> = ({
+  currentQuestionId,
+  onPrevQuestion,
+  isFirstQuestion,
+}) => {
   return (
-    <Box textAlign="center">
-      <Text fontWeight="bold">
-        <Text color="bg.thirty" display="inline">
-          {currentQuizId}
-        </Text>{" "}
-        / 10
-      </Text>
+    <Box>
+      <Flex alignItems="center" h="36px">
+        {!isFirstQuestion && (
+          <IconButton
+            variant="ghost"
+            size="sm"
+            color="white"
+            _hover={{ bg: "bg.secondary" }}
+            onClick={onPrevQuestion}
+          >
+            <LuArrowLeft />
+          </IconButton>
+        )}
+        <Text fontWeight="bold" flex={1} textAlign="center">
+          <Text as="span" color="bg.thirty" display="inline">
+            {currentQuestionId}
+          </Text>{" "}
+          / 10
+        </Text>
+        {!isFirstQuestion && <Box w="36px" />}
+      </Flex>
       <Progress.Root
         min={1}
         max={10}
-        value={currentQuizId}
-        mt={3}
+        value={currentQuestionId}
+        mt={2}
         colorPalette="pink"
       >
         <Progress.Track>

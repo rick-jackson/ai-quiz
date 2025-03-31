@@ -5,6 +5,7 @@ type Quiz = {
   answers: {
     id: number;
     text: string;
+    isCorrect: boolean;
   }[];
 };
 

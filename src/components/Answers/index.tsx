@@ -6,9 +6,15 @@ const html = String.raw;
 
 type AnswersProps = {
   answers: Quiz["answers"];
+  onSelectAnswer: (answerId: number) => void;
+  selectedAnswerId: number;
 };
 
-const Answers: React.FC<AnswersProps> = ({ answers }) => {
+const Answers: React.FC<AnswersProps> = ({
+  answers,
+  onSelectAnswer,
+  selectedAnswerId,
+}) => {
   return (
     <Flex direction="column" gap={2} mt={6}>
       <For each={answers}>
@@ -18,8 +24,16 @@ const Answers: React.FC<AnswersProps> = ({ answers }) => {
             justifyContent="flex-start"
             size="2xl"
             variant="subtle"
+            borderWidth={2}
+            transition="none"
+            {...(selectedAnswerId === answer.id && { borderColor: "red" })}
+            {...(!!selectedAnswerId &&
+              answer.isCorrect && { borderColor: "green" })}
+            onClick={() => onSelectAnswer(answer.id)}
           >
             <Prose
+              whiteSpace="normal !important"
+              textAlign="left !important"
               dangerouslySetInnerHTML={{
                 __html: html`${answer.text}`,
               }}
