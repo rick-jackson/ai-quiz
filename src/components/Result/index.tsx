@@ -18,6 +18,8 @@ const Result: React.FC<ResultProps> = ({
   correctUserAnswers,
   onResetQuiz,
 }) => {
+  const resultPercent = (correctUserAnswers / allQuestionsCount) * 100;
+
   return (
     <Container
       m="auto"
@@ -38,7 +40,7 @@ const Result: React.FC<ResultProps> = ({
         m="auto"
       >
         <ProgressCircle.Root
-          value={88}
+          value={resultPercent}
           colorPalette="pink"
           transform="scale(7)"
         >
@@ -55,8 +57,7 @@ const Result: React.FC<ResultProps> = ({
       </Box>
 
       <Text>
-        You got {(correctUserAnswers / allQuestionsCount) * 100}% of the answers
-        correct. Congratulations!
+        You got {resultPercent}% of the answers correct. Congratulations!
       </Text>
       <Button size="xl" variant="surface" onClick={onResetQuiz}>
         Пройти знову
