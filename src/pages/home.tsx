@@ -119,7 +119,7 @@ const HomePage: React.FC = () => {
         color="gray.900"
         textAlign={{ base: "center", md: "left" }}
       >
-        <Text fontWeight={500} textStyle="5xl">
+        <Text fontWeight={500} textStyle={{ base: "4xl", sm: "5xl" }}>
           How it Works
         </Text>
         <Text textStyle="xl" fontWeight={500}>
