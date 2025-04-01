@@ -9,6 +9,7 @@ const config = defineConfig({
           primaryHover: { value: "#5f45ba" },
           secondary: { value: "#654bbf" },
           thirty: { value: "#e4229c" },
+          primaryBlue: { value: "#3f30dd" },
         },
       },
     },
@@ -17,7 +18,7 @@ const config = defineConfig({
     body: { minHeight: "100%", display: "flex", width: "100%" },
     "#root": { height: "100%", width: "100%" },
     button: {
-      borderRadius: "14px !important",
+      borderRadius: "14px",
     },
     html: {
       width: "100%",

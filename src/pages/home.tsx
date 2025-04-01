@@ -10,18 +10,23 @@ import {
   Field,
   Card,
   Grid,
+  For,
+  List,
 } from "@chakra-ui/react";
 //@ts-ignore
-import List from "../assets/list.svg?react";
+import ListIcon from "../assets/list.svg?react";
 //@ts-ignore
 import Customize from "../assets/customize.svg?react";
 //@ts-ignore
 import Quiz from "../assets/quiz.svg?react";
 import LayoutBlock from "../components/Layout/Block";
+import { IoMdSettings } from "react-icons/io";
+import { IoIosText } from "react-icons/io";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const NAV_ITEMS = ["Home", "About", "Contact"];
 const STEPS = [
-  { icon: <List width="100%" height="100%" />, text: "Select a topic" },
+  { icon: <ListIcon width="100%" height="100%" />, text: "Select a topic" },
   {
     icon: <Customize width="100%" height="100%" fill="#4d37a7" />,
     text: "AI generated Quiz",
@@ -33,6 +38,191 @@ const STEPS = [
 ];
 
 const HomePage: React.FC = () => {
+  return (
+    <Box>
+      <Box bg="linear-gradient(63deg, rgba(163,156,239,1) 0%, rgba(105,99,242,1) 100%)">
+        <Container
+          display="flex"
+          justifyContent="space-between"
+          px={{ base: "20px", md: "40px", lg: "60px", xl: "80px" }}
+          py={10}
+        >
+          <Box
+            my="auto"
+            width={{ base: "100%", lg: "fit-content" }}
+            maxW={{ base: "600px", lg: "100%" }}
+            textAlign={{ base: "center", lg: "left" }}
+            m="auto"
+          >
+            <Text
+              as="h1"
+              fontSize={{
+                base: "clamp(3rem, 5vw, 4rem) !important",
+                md: "clamp(4rem, 5vw, 5rem) !important",
+              }}
+              fontWeight={700}
+              whiteSpace={{ base: "normal", lg: "nowrap" }}
+              lineHeight={"1.1 !important"}
+            >
+              Generate Quiz{" "}
+              <Box as="br" display={{ base: "none", md: "block" }} />
+              Questions with AI
+            </Text>
+            <Text as="h2" textStyle="2xl" mt={7}>
+              Choose a topic or enter your own, and let AI create questions for
+              your quiz.
+            </Text>
+            <Button
+              bg="blue.900"
+              mt={10}
+              size="2xl"
+              borderRadius={50}
+              px={20}
+              width={{ base: "100%", lg: "auto" }}
+            >
+              Get Started
+            </Button>
+          </Box>
+          <Box w="100%" display={{ base: "block", lgDown: "none" }}>
+            <Image
+              src="/images/robot.png"
+              w="100%"
+              objectFit="contain"
+              maxH={550}
+              h="auto"
+            />
+          </Box>
+        </Container>
+      </Box>
+      <Box bg="linear-gradient(186deg, rgba(113,89,228,1) 0%, rgba(102,79,224,1) 100%)">
+        <Container
+          px={{ base: "20px", md: "40px", lg: "60px", xl: "80px" }}
+          py={5}
+          pt={10}
+        >
+          <Text
+            textStyle="4xl"
+            fontWeight={600}
+            textAlign={{ base: "center", lg: "left" }}
+          >
+            How It Work
+          </Text>
+          <List.Root
+            gap="2"
+            variant="plain"
+            align="start"
+            mt={5}
+            textStyle="2xl"
+            flexDir={{ base: "column", lg: "row" }}
+          >
+            <List.Item>
+              <List.Indicator asChild color="white">
+                <IoMdSettings />
+              </List.Indicator>
+              AI generates questions based on chosen category
+            </List.Item>
+            <List.Item>
+              <List.Indicator asChild color="white">
+                <IoMdCheckmarkCircleOutline />
+              </List.Indicator>
+              Try to answer all the questions correctly!
+            </List.Item>
+            <List.Item>
+              <List.Indicator asChild color="white">
+                <IoIosText />
+              </List.Indicator>
+              Get immediate feedback on your answers
+            </List.Item>
+          </List.Root>
+        </Container>
+        <Container
+          px={{ base: "20px", md: "40px", lg: "60px", xl: "80px" }}
+          py={5}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          <Text textStyle="4xl" fontWeight={600}>
+            Choose a Category
+          </Text>
+          <Grid
+            templateColumns={{
+              base: "auto",
+              sm: "repeat(2, auto)",
+              md: "repeat(3, auto)",
+              xl: "repeat(4, auto)",
+            }}
+            mt={5}
+            gap={5}
+          >
+            <For each={new Array(8).fill(null)}>
+              {(_, index) => (
+                <Card.Root
+                  key={index}
+                  bg="whiteAlpha.100"
+                  borderColor="whiteAlpha.300"
+                  color="white"
+                  textStyle="3xl"
+                  fontWeight={500}
+                  h={200}
+                  transition="0.2s"
+                  cursor="pointer"
+                  _hover={{
+                    transform: "scale(1.05)",
+                  }}
+                >
+                  <Card.Body>sdf</Card.Body>
+                </Card.Root>
+              )}
+            </For>
+          </Grid>
+        </Container>
+        <Container
+          px={{ base: "20px", md: "40px", lg: "60px", xl: "80px" }}
+          py={5}
+        >
+          <Text textStyle="4xl" fontWeight={600} textAlign="center">
+            Or Enter Your Own Category
+          </Text>
+          <Flex as="form" flexDir="column" gap={4} maxW={600} m="auto" mt={5}>
+            <Input
+              borderRadius={15}
+              size="2xl"
+              placeholder="Enter category"
+              bg="whiteAlpha.100"
+              borderColor="whiteAlpha.300"
+              color="white"
+              _focus={{
+                outlineColor: "whiteAlpha.300",
+                outlineWidth: 2,
+              }}
+              _placeholder={{
+                color: "whiteAlpha.600",
+              }}
+            />
+            <Input
+              borderRadius={15}
+              size="2xl"
+              placeholder="Enter a number"
+              bg="whiteAlpha.100"
+              borderColor="whiteAlpha.300"
+              color="white"
+              type="number"
+              _focus={{
+                outlineColor: "whiteAlpha.300",
+                outlineWidth: 2,
+              }}
+              _placeholder={{
+                color: "whiteAlpha.600",
+              }}
+            />
+            <Button size="2xl" borderRadius={15} bg="blue.900">
+              Generate
+            </Button>
+          </Flex>
+        </Container>
+      </Box>
+    </Box>
+  );
+
   return (
     <Box h="100%" bg="gray.100">
       <Container
