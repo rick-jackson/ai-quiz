@@ -158,7 +158,7 @@ const HomePage: React.FC = () => {
           mt={5}
           gap={5}
         >
-          {new Array(12).fill(null).map((el, index) => (
+          {new Array(12).fill(null).map((_, index) => (
             <Card.Root
               key={index}
               bg="none"
