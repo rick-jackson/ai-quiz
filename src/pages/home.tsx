@@ -6,6 +6,10 @@ import {
   Text,
   Image,
   Center,
+  Input,
+  Field,
+  Card,
+  Grid,
 } from "@chakra-ui/react";
 //@ts-ignore
 import List from "../assets/list.svg?react";
@@ -13,6 +17,7 @@ import List from "../assets/list.svg?react";
 import Customize from "../assets/customize.svg?react";
 //@ts-ignore
 import Quiz from "../assets/quiz.svg?react";
+import LayoutBlock from "../components/Layout/Block";
 
 const NAV_ITEMS = ["Home", "About", "Contact"];
 const STEPS = [
@@ -112,19 +117,10 @@ const HomePage: React.FC = () => {
           />
         </Box>
       </Container>
-      <Container
-        py={10}
-        px={{ base: 5, md: 10, lg: 20 }}
-        maxW="container.xl"
-        color="gray.900"
-        textAlign={{ base: "center", md: "left" }}
+      <LayoutBlock
+        title="How it Works"
+        subtitle="Generate a set of AI-powered quiz questions in three simple steps."
       >
-        <Text fontWeight={500} textStyle={{ base: "4xl", sm: "5xl" }}>
-          How it Works
-        </Text>
-        <Text textStyle="xl" fontWeight={500}>
-          Generate a set of AI-powered quiz questions in three simple steps.
-        </Text>
         <Flex
           alignItems="stretch"
           flexDir={{ base: "column", md: "row" }}
@@ -150,7 +146,83 @@ const HomePage: React.FC = () => {
             </Flex>
           ))}
         </Flex>
-      </Container>
+      </LayoutBlock>
+      <LayoutBlock title="Quiz Topics" color="#000">
+        <Grid
+          templateColumns={{
+            base: "auto",
+            sm: "repeat(2, auto)",
+            md: "repeat(3, auto)",
+            xl: "repeat(4, auto)",
+          }}
+          mt={5}
+          gap={5}
+        >
+          {new Array(12).fill(null).map((el, index) => (
+            <Card.Root
+              key={index}
+              bg="none"
+              bgImage="url(./categories/category.jpg)"
+              bgRepeat="no-repeat"
+              bgSize="cover"
+              h={200}
+              transition="0.2s"
+              _hover={{
+                zIndex: 99,
+                transform: "scale(1.05)",
+              }}
+            >
+              <Card.Body>
+                <Card.Title>Living room Sofa</Card.Title>
+                <Card.Description>
+                  This sofa is perfect for modern tropical spaces, baroque
+                  inspired spaces.
+                </Card.Description>
+              </Card.Body>
+            </Card.Root>
+          ))}
+        </Grid>
+      </LayoutBlock>
+      <LayoutBlock title="Create Your Own Quiz" textAlign="center">
+        <Flex
+          as="form"
+          maxW={500}
+          m="auto"
+          boxShadow="2xl"
+          p={10}
+          mt={5}
+          borderRadius={10}
+          flexDir="column"
+          gap={5}
+        >
+          <Field.Root required>
+            <Field.Label textStyle="xl" fontWeight={700}>
+              Topic
+            </Field.Label>
+            <Input
+              placeholder="Enter a topic"
+              size="xl"
+              borderColor="gray.700"
+              borderRadius={10}
+            />
+          </Field.Root>
+          <Field.Root required>
+            <Field.Label textStyle="xl" fontWeight={700}>
+              Number of questions
+            </Field.Label>
+            <Input
+              placeholder="Enter a number"
+              size="xl"
+              borderColor="gray.700"
+              borderRadius={10}
+              type="number"
+            />
+          </Field.Root>
+          <Button type="submit" size="xl" bg="bg.primary">
+            Generate
+          </Button>
+        </Flex>
+      </LayoutBlock>
     </Box>
   );
 };
