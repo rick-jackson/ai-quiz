@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
         <Flex
           alignItems="stretch"
           flexDir={{ base: "column", md: "row" }}
-          gap={{ base: 10, xl: 20 }}
+          gap={{ base: 5, xl: 20 }}
           mt={8}
         >
           {STEPS.map(({ icon, text }, index) => (
@@ -139,8 +139,12 @@ const HomePage: React.FC = () => {
               borderRadius={10}
               flex={1}
             >
-              <Center maxW={200}>{icon}</Center>
-              <Text textStyle="3xl" fontWeight={600} mt={4}>
+              <Center maxW={{ base: 100, md: 150 }}>{icon}</Center>
+              <Text
+                textStyle={{ base: "xl", xl: "3xl" }}
+                fontWeight={600}
+                mt={4}
+              >
                 {text}
               </Text>
             </Flex>
@@ -167,14 +171,15 @@ const HomePage: React.FC = () => {
               bgSize="cover"
               h={200}
               transition="0.2s"
+              boxShadow="inset 0px -84px 63px -22px rgba(0, 0, 0, 0.82)"
               _hover={{
                 zIndex: 99,
                 transform: "scale(1.05)",
               }}
             >
-              <Card.Body>
+              <Card.Body justifyContent="end" color="white">
                 <Card.Title>Living room Sofa</Card.Title>
-                <Card.Description>
+                <Card.Description color="whiteAlpha.900">
                   This sofa is perfect for modern tropical spaces, baroque
                   inspired spaces.
                 </Card.Description>
