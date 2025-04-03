@@ -17,14 +17,17 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const HomePage: React.FC = () => {
   const categories = [
+    { name: "Art", icon: "./categories/art.png" },
     { name: "Chemistry", icon: "./categories/chemistry.png" },
     { name: "Food", icon: "./categories/food.png" },
     { name: "Geography", icon: "./categories/geography.png" },
     { name: "History", icon: "./categories/history.png" },
+    { name: "Literature", icon: "./categories/literature.png" },
     { name: "Mathematic", icon: "./categories/mathematic.png" },
     { name: "Medicine", icon: "./categories/medicine.png" },
     { name: "Space", icon: "./categories/space.png" },
     { name: "Sport", icon: "./categories/sport.png" },
+    { name: "Technologies", icon: "./categories/technologies.png" },
     { name: "Travel", icon: "./categories/travel.png" },
     { name: "Zoology", icon: "./categories/zoology.png" },
   ];
