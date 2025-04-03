@@ -160,7 +160,7 @@ const HomePage: React.FC = () => {
           </Text>
           <Grid
             templateColumns={{
-              base: "auto",
+              base: "repeat(2, auto)",
               sm: "repeat(2, auto)",
               md: "repeat(3, auto)",
               xl: "repeat(4, auto)",
@@ -191,9 +191,7 @@ const HomePage: React.FC = () => {
                       maxW={200}
                       m="auto"
                     />
-                    <Card.Title textAlign="center" mt={4}>
-                      {category.name}
-                    </Card.Title>
+                    <Card.Title textAlign="center">{category.name}</Card.Title>
                   </Card.Body>
                 </Card.Root>
               )}
