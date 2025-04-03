@@ -17,12 +17,15 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const HomePage: React.FC = () => {
   const categories = [
+    { name: "Chemistry", icon: "./categories/chemistry.png" },
+    { name: "Food", icon: "./categories/food.png" },
     { name: "Geography", icon: "./categories/geography.png" },
     { name: "History", icon: "./categories/history.png" },
-    { name: "Chemistry", icon: "./categories/chemistry.png" },
-    { name: "Travel", icon: "./categories/travel.png" },
     { name: "Mathematic", icon: "./categories/mathematic.png" },
+    { name: "Medicine", icon: "./categories/medicine.png" },
     { name: "Space", icon: "./categories/space.png" },
+    { name: "Sport", icon: "./categories/sport.png" },
+    { name: "Travel", icon: "./categories/travel.png" },
     { name: "Zoology", icon: "./categories/zoology.png" },
   ];
   return (
@@ -180,18 +183,18 @@ const HomePage: React.FC = () => {
                     transform: "scale(1.05)",
                   }}
                 >
-                  {/* <Card.Body> */}
-                  <Image
-                    src={category.icon}
-                    w="100%"
-                    h="auto"
-                    // maxW={150}
-                    m="auto"
-                  />
-                  <Card.Title textAlign="center" mt={4}>
-                    {category.name}
-                  </Card.Title>
-                  {/* </Card.Body> */}
+                  <Card.Body>
+                    <Image
+                      src={category.icon}
+                      w="100%"
+                      h="auto"
+                      maxW={200}
+                      m="auto"
+                    />
+                    <Card.Title textAlign="center" mt={4}>
+                      {category.name}
+                    </Card.Title>
+                  </Card.Body>
                 </Card.Root>
               )}
             </For>
