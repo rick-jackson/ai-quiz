@@ -27,8 +27,7 @@ export default async function handler(req, res) {
             {
               parts: [
                 {
-                  text:
-                    `
+                  text: `
                   Generate a set of 10 quiz questions on the topic: ${prompt}.
 
 Requirements:
@@ -54,18 +53,8 @@ Content requirements:
 - Questions must be diverse in wording and type
 - Difficulty level: ${level}
 - Each generation must be different from the previous
-- You may use HTML tags for better visual formatting (e.g., ` <
-                    b >
-                    `, ` <
-                    i >
-                    `, ` <
-                    br >
-                    `)
-
 If the topic is invalid or unsuitable for a quiz, return **only** the following line:
-
 Do not include any extra explanations or text outside the array.
-
                   `,
                 },
               ],
