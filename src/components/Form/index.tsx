@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const Form: React.FC = () => {
   const [category, setCategory] = useState("");
   const [answersCount, setAnswersCount] = useState("4");
-  const [level, setLevel] = useState("easy");
+  const [level, setLevel] = useState("Easy");
   const [errors, setErrors] = useState<{
     category?: string;
     answersCount?: string;
@@ -121,20 +121,25 @@ const Form: React.FC = () => {
           onValueChange={(e) => setLevel(e.value!)}
         >
           <HStack gap={20}>
-            <RadioGroup.Item value="easy">
+            <RadioGroup.Item value="Easy">
               <RadioGroup.ItemHiddenInput />
               <RadioGroup.ItemIndicator />
               <RadioGroup.ItemText>Easy</RadioGroup.ItemText>
             </RadioGroup.Item>
-            <RadioGroup.Item value="medium">
+            <RadioGroup.Item value="Medium">
               <RadioGroup.ItemHiddenInput />
               <RadioGroup.ItemIndicator />
               <RadioGroup.ItemText>Medium</RadioGroup.ItemText>
             </RadioGroup.Item>
-            <RadioGroup.Item value="hard">
+            <RadioGroup.Item value="Hard">
               <RadioGroup.ItemHiddenInput />
               <RadioGroup.ItemIndicator />
               <RadioGroup.ItemText>Hard</RadioGroup.ItemText>
+            </RadioGroup.Item>
+            <RadioGroup.Item value="Very Hard">
+              <RadioGroup.ItemHiddenInput />
+              <RadioGroup.ItemIndicator />
+              <RadioGroup.ItemText>Very Hard</RadioGroup.ItemText>
             </RadioGroup.Item>
           </HStack>
         </RadioGroup.Root>
