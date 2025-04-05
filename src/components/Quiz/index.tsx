@@ -8,9 +8,10 @@ import Result from "../Result";
 
 type QuizProps = {
   quiz: QuizType[];
+  getQuizData: () => Promise<void>;
 };
 
-const Quiz: React.FC<QuizProps> = ({ quiz }) => {
+const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [userAnswers, setUserAnswers] = useState<
@@ -58,6 +59,7 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
   if (showResult)
     return (
       <Result
+        getQuizData={getQuizData}
         onResetQuiz={handleResetQuiz}
         allQuestionsCount={quiz.length}
         correctUserAnswers={

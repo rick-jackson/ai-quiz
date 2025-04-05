@@ -34,19 +34,21 @@ const Banner: React.FC = () => {
             Choose a topic or enter your own, and let AI create questions for
             your quiz.
           </Text>
-          <Button
-            bg="blue.900"
-            mt={10}
-            size="2xl"
-            borderRadius={50}
-            px={20}
-            width={{ base: "100%", lg: "auto" }}
-            _hover={{
-              transform: "scale(1.1)",
-            }}
-          >
-            Get Started
-          </Button>
+          <a href="/#categories">
+            <Button
+              bg="blue.900"
+              mt={10}
+              size="2xl"
+              borderRadius={50}
+              px={20}
+              width={{ base: "100%", lg: "auto" }}
+              _hover={{
+                transform: "scale(1.1)",
+              }}
+            >
+              Get Started
+            </Button>
+          </a>
         </Box>
         <Box w="100%" display={{ base: "block", lgDown: "none" }}>
           <Image

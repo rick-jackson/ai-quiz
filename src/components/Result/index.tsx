@@ -6,17 +6,20 @@ import {
   ProgressCircle,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 type ResultProps = {
   allQuestionsCount: number;
   correctUserAnswers: number;
   onResetQuiz: () => void;
+  getQuizData: () => Promise<void>;
 };
 
 const Result: React.FC<ResultProps> = ({
   allQuestionsCount,
   correctUserAnswers,
   onResetQuiz,
+  getQuizData,
 }) => {
   const resultPercent = (correctUserAnswers / allQuestionsCount) * 100;
 
@@ -62,12 +65,14 @@ const Result: React.FC<ResultProps> = ({
       <Button size="xl" variant="surface" onClick={onResetQuiz}>
         Пройти знову
       </Button>
-      <Button size="xl" variant="surface">
+      <Button size="xl" variant="surface" onClick={getQuizData}>
         Оновити запитання
       </Button>
-      <Button size="xl" variant="surface">
-        Змінити тему
-      </Button>
+      <Link to="/#categories" style={{ display: "flex" }}>
+        <Button size="xl" variant="surface" flex={1}>
+          Змінити тему
+        </Button>
+      </Link>
     </Container>
   );
 };

@@ -68,7 +68,7 @@ const Categories: React.FC = () => {
   };
 
   return (
-    <Container title="Choose a Category">
+    <Container title="Choose a Category" id="categories">
       <Collapsible.Root m="auto">
         <CategoryGrid items={visibleCategories} onStartQuiz={handleStartQuiz} />
         <Collapsible.Content mt={5}>

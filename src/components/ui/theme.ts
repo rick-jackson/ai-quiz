@@ -15,17 +15,25 @@ const config = defineConfig({
     },
   },
   globalCss: {
-    body: { minHeight: "100%", display: "flex", width: "100%" },
+    body: {
+      minHeight: "100%",
+      display: "flex",
+      width: "100%",
+    },
     "#root": { height: "100%", width: "100%" },
     button: {
       borderRadius: "14px",
     },
     html: {
+      scrollBehavior: "smooth",
       width: "100%",
       display: "flex",
       minHeight: "100%",
       colorScheme: "light",
       color: "#f2f3f5",
+    },
+    a: {
+      textDecoration: "none",
     },
   },
 });

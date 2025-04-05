@@ -12,28 +12,29 @@ const QuizPage: React.FC = () => {
   const [error, setError] = useState<ErrorType>({} as ErrorType);
   const [quiz, setQuiz] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const data = await fetchGeminiResponse(
-          localStorage.getItem("category") as string,
-          (localStorage.getItem("level") as string) || "very hard",
-          Number(localStorage.getItem("answersCount")) || 4
-        );
-        console.log(data);
-        if (!data?.error) {
-          setQuiz(data);
-        } else {
-          setError(data);
-        }
-      } catch (error) {
-        console.log(error);
-        setError(error as { status: number; error: string });
-      } finally {
-        setLoading(false);
+  const getQuizData = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchGeminiResponse(
+        localStorage.getItem("category") as string,
+        (localStorage.getItem("level") as string) || "very hard",
+        Number(localStorage.getItem("answersCount")) || 4
+      );
+      if (!data?.error) {
+        setQuiz(data);
+      } else {
+        setError(data);
       }
-    })();
+    } catch (error) {
+      console.log(error);
+      setError(error as { status: number; error: string });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getQuizData();
   }, []);
 
   return (
@@ -48,7 +49,7 @@ const QuizPage: React.FC = () => {
       ) : !!error?.error ? (
         <Error {...error} />
       ) : (
-        <Quiz quiz={quiz} />
+        <Quiz quiz={quiz} getQuizData={getQuizData} />
       )}
     </Box>
   );
