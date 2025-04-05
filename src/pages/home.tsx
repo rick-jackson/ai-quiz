@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
     { name: "Medicine", icon: "./categories/medicine.png" },
     {
       name: "Philosopny and Religion",
-      icon: "./categories/philosopny-and-religion.png",
+      icon: "./categories/philosophy-and-religion.png",
     },
     { name: "Policy", icon: "./categories/policy.png" },
     { name: "Space", icon: "./categories/space.png" },
