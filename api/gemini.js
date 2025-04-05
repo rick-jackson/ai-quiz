@@ -27,30 +27,46 @@ export default async function handler(req, res) {
             {
               parts: [
                 {
-                  text: `Generate 10 questions with answers for a quiz on the topic: ${prompt}.
-Answer format – array of objects only, with no additional text.
-The correct answer must appear in a random position within the array.
-Questions must be diverse. Each time you generate them, they must be different.
-Question difficulty: ${level}.
-Number of answers: ${answersCount}.
-If it is not possible to create questions on the given topic, return only this line:
-"Invalid prompt."
-No other text should be included in the response!
-You may use HTML tags to make the text visually appealing.
-Try to keep the answers approximately the same length.
-language: українська.
-Example object:
-[{
-  "id": 1,
-  "question": "question",
-  "answers": [
-    { "id": 1, "text": "answer1", "isCorrect": true },
-    { "id": 2, "text": "answer2", "isCorrect": false },
-    { "id": 3, "text": "answer3", "isCorrect": false },
-    { "id": 4, "text": "answer4", "isCorrect": false }
-  ]
-}];
-`,
+                  text:
+                    `
+                  Generate a set of 10 quiz questions on the topic: ${prompt}.
+
+Requirements:
+- Language: українська
+- Format: JSON array of objects only (NO other text or explanation)
+- Each object structure must follow this format:
+  {
+    "id": <number>,
+    "question": "<html-formatted question text>",
+    "answers": [
+      { "id": 1, "text": "<answer1>", "isCorrect": <true|false> },
+      { "id": 2, "text": "<answer2>", "isCorrect": <true|false> },
+      ...
+    ]
+  }
+
+Answer options:
+- Total answers per question: ${answersCount}
+- The correct answer must appear in a **random** position in the list
+- All answer texts should be roughly equal in length
+
+Content requirements:
+- Questions must be diverse in wording and type
+- Difficulty level: ${level}
+- Each generation must be different from the previous
+- You may use HTML tags for better visual formatting (e.g., ` <
+                    b >
+                    `, ` <
+                    i >
+                    `, ` <
+                    br >
+                    `)
+
+If the topic is invalid or unsuitable for a quiz, return **only** the following line:
+
+Do not include any extra explanations or text outside the array.
+
+                  `,
                 },
               ],
             },
