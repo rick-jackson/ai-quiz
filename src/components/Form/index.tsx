@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const Form: React.FC = () => {
   const [category, setCategory] = useState("");
-  const [answersCount, setAnswersCount] = useState(2);
+  const [answersCount, setAnswersCount] = useState("2");
   const [level, setLevel] = useState("easy");
   const [errors, setErrors] = useState<{
     category?: string;
@@ -29,7 +29,7 @@ const Form: React.FC = () => {
     if (!category.trim()) {
       newErrors.category = "Category is required!";
     }
-    if (!answersCount || answersCount < 2 || answersCount > 6) {
+    if (!answersCount || +answersCount < 2 || +answersCount > 6) {
       newErrors.answersCount = "Answers count must be between 2 and 6";
     }
 
@@ -88,7 +88,7 @@ const Form: React.FC = () => {
         <Box>
           <Input
             value={answersCount}
-            onChange={(e) => setAnswersCount(+e.target.value)}
+            onChange={(e) => setAnswersCount(e.target.value)}
             borderRadius={15}
             size="2xl"
             placeholder="Enter a number"

@@ -21,12 +21,14 @@ const QuizPage: React.FC = () => {
           localStorage.getItem("level") as string,
           Number(localStorage.getItem("answersCount"))
         );
+        console.log(data);
         if (!data?.error) {
           setQuiz(data);
         } else {
           setError(data);
         }
       } catch (error) {
+        console.log(error);
         setError(error as { status: number; error: string });
       } finally {
         setLoading(false);
@@ -43,7 +45,7 @@ const QuizPage: React.FC = () => {
     >
       {loading ? (
         <Loader />
-      ) : !!error?.status ? (
+      ) : !!error?.error ? (
         <Error {...error} />
       ) : (
         <Quiz quiz={quiz} />
