@@ -3,8 +3,14 @@ import Banner from "../components/Banner";
 import HowItWorks from "../components/HowItWorks";
 import Categories from "../components/Categories";
 import Form from "../components/Form";
+import { useEffect } from "react";
 
 const HomePage: React.FC = () => {
+  useEffect(() => {
+    localStorage.removeItem("category");
+    localStorage.removeItem("level");
+    localStorage.removeItem("answersCount");
+  }, []);
   return (
     <Box>
       <Banner />
