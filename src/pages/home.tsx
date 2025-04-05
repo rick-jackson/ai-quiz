@@ -11,20 +11,24 @@ import {
   For,
   List,
 } from "@chakra-ui/react";
-import { IoMdSettings } from "react-icons/io";
-import { IoIosText } from "react-icons/io";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const HomePage: React.FC = () => {
   const categories = [
     { name: "Art", icon: "./categories/art.png" },
     { name: "Chemistry", icon: "./categories/chemistry.png" },
+    { name: "Economy", icon: "./categories/economy.png" },
     { name: "Food", icon: "./categories/food.png" },
     { name: "Geography", icon: "./categories/geography.png" },
     { name: "History", icon: "./categories/history.png" },
     { name: "Literature", icon: "./categories/literature.png" },
+    { name: "Logic", icon: "./categories/logic.png" },
     { name: "Mathematic", icon: "./categories/mathematic.png" },
     { name: "Medicine", icon: "./categories/medicine.png" },
+    {
+      name: "Philosopny and Religion",
+      icon: "./categories/philosopny-and-religion.png",
+    },
+    { name: "Policy", icon: "./categories/policy.png" },
     { name: "Space", icon: "./categories/space.png" },
     { name: "Sport", icon: "./categories/sport.png" },
     { name: "Technologies", icon: "./categories/technologies.png" },
@@ -100,56 +104,79 @@ const HomePage: React.FC = () => {
             How It Works
           </Text>
           <List.Root
-            gap="2"
+            gap={20}
             variant="plain"
-            align="start"
+            // align="start"
+            alignItems="center"
             mt={5}
             textStyle="2xl"
-            flexDir={{ base: "column", lg: "row" }}
-            textAlign={{ base: "left", lg: "center" }}
+            flexDir={{ base: "column", md: "row" }}
+            textAlign="center"
             justifyContent="space-around"
           >
             <List.Item
-              flexDir={{ base: "row", lg: "column" }}
-              alignItems={{ base: "start", lg: "center" }}
-              maxW={{ base: "none", lg: 300 }}
+              flexDir="column"
+              alignItems="center"
+              // alignItems={{ base: "start", lg: "center" }}
+              maxW={300}
             >
               <List.Indicator
                 asChild
                 color="white"
                 fontSize={{ base: "inherit", lg: 100 }}
               >
-                <IoMdSettings />
+                <Image
+                  src="/robot/robot3.png"
+                  w="100%"
+                  objectFit="contain"
+                  maxH={200}
+                  h="auto"
+                />
+                {/* <IoMdSettings /> */}
               </List.Indicator>
+              Choose a topic from the ones offered, or create your own
+              {/* AI generates questions based on chosen category */}
+            </List.Item>
+            <List.Item
+              flexDir="column"
+              alignItems="center"
+              // alignItems={{ base: "start", lg: "center" }}
+              maxW={300}
+            >
+              <List.Indicator
+                asChild
+                color="white"
+                fontSize={{ base: "inherit", lg: 100 }}
+              >
+                <Image
+                  src="/robot/robot1.png"
+                  w="100%"
+                  objectFit="contain"
+                  maxH={200}
+                  h="auto"
+                />
+                {/* <IoMdCheckmarkCircleOutline /> */}
+              </List.Indicator>
+              {/* Try to answer all the questions correctly! */}
               AI generates questions based on chosen category
             </List.Item>
-            <List.Item
-              flexDir={{ base: "row", lg: "column" }}
-              alignItems={{ base: "start", lg: "center" }}
-              maxW={{ base: "none", lg: 300 }}
-            >
+            <List.Item flexDir="column" alignItems="center" maxW={300}>
               <List.Indicator
                 asChild
                 color="white"
                 fontSize={{ base: "inherit", lg: 100 }}
               >
-                <IoMdCheckmarkCircleOutline />
+                {/* <IoIosText /> */}
+                <Image
+                  src="/robot/robot2.png"
+                  w="100%"
+                  objectFit="contain"
+                  maxH={200}
+                  h="auto"
+                />
               </List.Indicator>
-              Try to answer all the questions correctly!
-            </List.Item>
-            <List.Item
-              flexDir={{ base: "row", lg: "column" }}
-              alignItems={{ base: "start", lg: "center" }}
-              maxW={{ base: "none", lg: 300 }}
-            >
-              <List.Indicator
-                asChild
-                color="white"
-                fontSize={{ base: "inherit", lg: 100 }}
-              >
-                <IoIosText />
-              </List.Indicator>
-              Get immediate feedback on your answers
+              Get the result of your passage
+              {/* Get immediate feedback on your answers */}
             </List.Item>
           </List.Root>
         </Container>
