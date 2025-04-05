@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   Flex,
-  HStack,
+  Grid,
   Input,
   RadioGroup,
   Text,
@@ -120,7 +120,13 @@ const Form: React.FC = () => {
           value={level}
           onValueChange={(e) => setLevel(e.value!)}
         >
-          <HStack gap={20}>
+          <Grid
+            gridTemplateColumns={{
+              base: "repeat(2, 1fr)",
+              sm: "repeat(4, auto)",
+            }}
+            gap={5}
+          >
             <RadioGroup.Item value="Easy">
               <RadioGroup.ItemHiddenInput />
               <RadioGroup.ItemIndicator />
@@ -141,7 +147,7 @@ const Form: React.FC = () => {
               <RadioGroup.ItemIndicator />
               <RadioGroup.ItemText>Very Hard</RadioGroup.ItemText>
             </RadioGroup.Item>
-          </HStack>
+          </Grid>
         </RadioGroup.Root>
 
         <Button size="2xl" borderRadius={15} bg="blue.900" type="submit">
