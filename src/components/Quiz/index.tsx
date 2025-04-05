@@ -23,7 +23,6 @@ const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
 
   const currentQuestion = quiz.find((el) => el.id === currentQuestionId);
   const lastQuestionId = quiz[quiz.length - 1].id;
-  const firstQuestionId = quiz[0].id;
 
   const handleNextQuestion = () => {
     if (currentQuestionId !== lastQuestionId) {
@@ -35,10 +34,6 @@ const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
         setShowResult(true);
       }, 700);
     }
-  };
-
-  const handlePrevQuestion = () => {
-    setCurrentQuestionId((prev) => prev - 1);
   };
 
   const handleSelectAnswer = (answerId: number, isCorrect: boolean) => {
@@ -81,8 +76,7 @@ const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
     >
       <Toolbar
         currentQuestionId={currentQuestionId}
-        onPrevQuestion={handlePrevQuestion}
-        isFirstQuestion={firstQuestionId === currentQuestionId}
+        totalQuestions={quiz.length}
       />
       <Box flex="1 auto">
         <Question question={currentQuestion!.question} />

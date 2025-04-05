@@ -17,8 +17,9 @@ const QuizPage: React.FC = () => {
     try {
       const data = await fetchGeminiResponse(
         localStorage.getItem("category") as string,
-        (localStorage.getItem("level") as string) || "very hard",
-        Number(localStorage.getItem("answersCount")) || 4
+        (localStorage.getItem("difficulty") as string) || "Very Hard",
+        Number(localStorage.getItem("answerCount")) || 4,
+        Number(localStorage.getItem("questionCount")) || 10
       );
       if (!data?.error) {
         setQuiz(data);
@@ -26,7 +27,6 @@ const QuizPage: React.FC = () => {
         setError(data);
       }
     } catch (error) {
-      console.log(error);
       setError(error as { status: number; error: string });
     } finally {
       setLoading(false);

@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   if (req.method !== "POST")
     return res.status(405).json({ error: "Method Not Allowed" });
 
-  const { prompt, level, answersCount } = req.body;
+  const { prompt, difficulty, answerCount, questionCount } = req.body;
   if (!prompt)
     return res
       .status(400)
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
               parts: [
                 {
                   text: `
-                  Generate a set of 10 quiz questions on the topic: ${prompt}.
+                  Generate a set of ${questionCount} quiz questions on the topic: ${prompt}.
 
 Requirements:
 - Language: українська
@@ -45,13 +45,13 @@ Requirements:
   }
 
 Answer options:
-- Total answers per question: ${answersCount}
+- Total answers per question: ${answerCount}
 - The correct answer must appear in a **random** position in the list
 - All answer texts should be roughly equal in length
 
 Content requirements:
 - Questions must be diverse in wording and type
-- Difficulty level: ${level}
+- Difficulty level: ${difficulty}
 - Each generation must be different from the previous
 If the topic is invalid or unsuitable for a quiz, return **only** the following line:
 Do not include any extra explanations or text outside the array.

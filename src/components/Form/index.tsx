@@ -1,152 +1,167 @@
 import {
-  Box,
   Button,
+  Field,
   Flex,
   Grid,
   Input,
+  InputProps,
   RadioGroup,
-  Text,
 } from "@chakra-ui/react";
 import Container from "../Container";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const inputStyles: InputProps = {
+  borderRadius: 15,
+  size: "2xl",
+  bg: "whiteAlpha.100",
+  borderColor: "whiteAlpha.300",
+  color: "white",
+  _focus: {
+    outlineColor: "whiteAlpha.300",
+    outlineWidth: 2,
+  },
+  _placeholder: {
+    color: "whiteAlpha.600",
+  },
+};
+
 const Form: React.FC = () => {
   const [category, setCategory] = useState("");
-  const [answersCount, setAnswersCount] = useState("4");
-  const [level, setLevel] = useState("Easy");
-  const [errors, setErrors] = useState<{
+  const [answerCount, setAnswerCount] = useState("4");
+  const [questionCount, setQuestionCount] = useState("10");
+  const [difficulty, setDifficulty] = useState("Easy");
+
+  const [formErrors, setFormErrors] = useState<{
     category?: string;
-    answersCount?: string;
+    answerCount?: string;
+    questionCount?: string;
   }>({});
 
-  const navigateTo = useNavigate();
+  const navigate = useNavigate();
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateForm = () => {
+    const errors: typeof formErrors = {};
 
-    const newErrors: typeof errors = {};
     if (!category.trim()) {
-      newErrors.category = "Category is required!";
-    }
-    if (!answersCount || +answersCount < 2 || +answersCount > 6) {
-      newErrors.answersCount = "Answers count must be between 2 and 6";
+      errors.category = "Category is required!";
     }
 
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length > 0) {
-      return;
+    const answers = +answerCount;
+    if (!answerCount || answers < 2 || answers > 6) {
+      errors.answerCount = "Answers count must be between 2 and 6";
     }
 
-    localStorage.setItem("category", category);
-    localStorage.setItem("answersCount", String(answersCount));
-    localStorage.setItem("level", level);
-    navigateTo("/quiz");
+    const questions = +questionCount;
+    if (!questionCount || questions < 5 || questions > 20) {
+      errors.questionCount = "Questions count must be between 5 and 20";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    localStorage.setItem("category", category.trim());
+    localStorage.setItem("answerCount", answerCount);
+    localStorage.setItem("questionCount", questionCount);
+    localStorage.setItem("difficulty", difficulty);
+
+    navigate("/quiz");
   };
 
   return (
     <Container title="Or Enter Your Own Category">
       <Flex
         as="form"
-        flexDir="column"
+        direction="column"
         gap={4}
         maxW={600}
-        m="auto"
-        onSubmit={onSubmit}
+        mx="auto"
+        onSubmit={handleSubmit}
       >
-        <Box>
+        <Field.Root invalid>
+          <Field.Label>Category</Field.Label>
           <Input
             value={category}
             onChange={(e) => {
-              setErrors((prev) => ({
+              const value = e.target.value;
+              setCategory(value);
+              setFormErrors((prev) => ({
                 ...prev,
-                category: !e.target.value ? "Category is required!" : "",
+                category: value.trim() ? "" : "Category is required!",
               }));
-              setCategory(e.target.value);
             }}
-            borderRadius={15}
-            size="2xl"
             placeholder="Enter category"
-            bg="whiteAlpha.100"
-            borderColor="whiteAlpha.300"
-            color="white"
-            _focus={{
-              outlineColor: "whiteAlpha.300",
-              outlineWidth: 2,
-            }}
-            _placeholder={{
-              color: "whiteAlpha.600",
-            }}
+            {...inputStyles}
           />
-          {errors.category && (
-            <Text color="red" fontSize="sm" ml={2} textAlign="left">
-              {errors.category}
-            </Text>
-          )}
-        </Box>
-        <Box>
+          <Field.ErrorText color="red">{formErrors.category}</Field.ErrorText>
+        </Field.Root>
+
+        <Field.Root invalid>
+          <Field.Label>Number of answers</Field.Label>
           <Input
-            value={answersCount}
-            onChange={(e) => setAnswersCount(e.target.value)}
-            borderRadius={15}
-            size="2xl"
+            value={answerCount}
+            onChange={(e) => {
+              const value = e.target.value;
+              setAnswerCount(value);
+              setFormErrors((prev) => ({
+                ...prev,
+                answerCount: value ? "" : "Number of answers is required!",
+              }));
+            }}
             placeholder="Enter a number"
-            bg="whiteAlpha.100"
-            borderColor="whiteAlpha.300"
-            color="white"
             type="number"
             min={2}
             max={6}
-            _focus={{
-              outlineColor: "whiteAlpha.300",
-              outlineWidth: 2,
-            }}
-            _placeholder={{
-              color: "whiteAlpha.600",
-            }}
+            {...inputStyles}
           />
-          {errors.answersCount && (
-            <Text color="red" fontSize="sm" ml={2} textAlign="left">
-              {errors.answersCount}
-            </Text>
-          )}
-        </Box>
-
+          <Field.ErrorText color="red">
+            {formErrors.answerCount}
+          </Field.ErrorText>
+        </Field.Root>
+        <Field.Root invalid>
+          <Field.Label>Number of questions</Field.Label>
+          <Input
+            value={questionCount}
+            onChange={(e) => {
+              const value = e.target.value;
+              setQuestionCount(value);
+              setFormErrors((prev) => ({
+                ...prev,
+                questionCount: value ? "" : "Number of questions is required!",
+              }));
+            }}
+            placeholder="Enter questions number"
+            type="number"
+            min={5}
+            max={20}
+            {...inputStyles}
+          />
+          <Field.ErrorText color="red">
+            {formErrors.questionCount}
+          </Field.ErrorText>
+        </Field.Root>
         <RadioGroup.Root
           variant="subtle"
-          defaultValue="react"
+          value={difficulty}
           colorPalette="whiteAlpha"
-          value={level}
-          onValueChange={(e) => setLevel(e.value!)}
+          onValueChange={(e) => setDifficulty(e.value!)}
         >
           <Grid
-            gridTemplateColumns={{
-              base: "repeat(2, 1fr)",
-              sm: "repeat(4, auto)",
-            }}
+            templateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(4, auto)" }}
             gap={5}
           >
-            <RadioGroup.Item value="Easy">
-              <RadioGroup.ItemHiddenInput />
-              <RadioGroup.ItemIndicator />
-              <RadioGroup.ItemText>Easy</RadioGroup.ItemText>
-            </RadioGroup.Item>
-            <RadioGroup.Item value="Medium">
-              <RadioGroup.ItemHiddenInput />
-              <RadioGroup.ItemIndicator />
-              <RadioGroup.ItemText>Medium</RadioGroup.ItemText>
-            </RadioGroup.Item>
-            <RadioGroup.Item value="Hard">
-              <RadioGroup.ItemHiddenInput />
-              <RadioGroup.ItemIndicator />
-              <RadioGroup.ItemText>Hard</RadioGroup.ItemText>
-            </RadioGroup.Item>
-            <RadioGroup.Item value="Very Hard">
-              <RadioGroup.ItemHiddenInput />
-              <RadioGroup.ItemIndicator />
-              <RadioGroup.ItemText>Very Hard</RadioGroup.ItemText>
-            </RadioGroup.Item>
+            {["Easy", "Medium", "Hard", "Very Hard"].map((difficulty) => (
+              <RadioGroup.Item key={difficulty} value={difficulty}>
+                <RadioGroup.ItemHiddenInput />
+                <RadioGroup.ItemIndicator />
+                <RadioGroup.ItemText>{difficulty}</RadioGroup.ItemText>
+              </RadioGroup.Item>
+            ))}
           </Grid>
         </RadioGroup.Root>
 

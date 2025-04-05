@@ -1,44 +1,54 @@
-import { Box, Flex, IconButton, Progress, Text } from "@chakra-ui/react";
-import { LuArrowLeft } from "react-icons/lu";
+import { Box, Flex, Progress, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { LuTimer } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 type ToolbarProps = {
   currentQuestionId: number;
-  onPrevQuestion: () => void;
-  isFirstQuestion: boolean;
+  totalQuestions: number;
 };
 
 const Toolbar: React.FC<ToolbarProps> = ({
   currentQuestionId,
-  // onPrevQuestion,
-  isFirstQuestion,
+
+  totalQuestions,
 }) => {
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (totalSeconds: number) => {
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+
   return (
     <Box>
       <Flex alignItems="center" h="36px">
-        {!isFirstQuestion && (
-          <Link to="/">
-            <IconButton
-              variant="ghost"
-              size="sm"
-              color="white"
-              _hover={{ bg: "bg.secondary" }}
-            >
-              <LuArrowLeft />
-            </IconButton>
-          </Link>
-        )}
+        <Flex alignItems="center" gap={2}>
+          <LuTimer size={24} />
+          <Text fontWeight="bold">{formatTime(timer)}</Text>
+        </Flex>
         <Text fontWeight="bold" flex={1} textAlign="center">
           <Text as="span" color="bg.thirty" display="inline">
             {currentQuestionId}
           </Text>{" "}
-          / 10
+          / {totalQuestions}
         </Text>
-        {!isFirstQuestion && <Box w="36px" />}
+        <Link to="/" color="white" style={{ fontWeight: 500 }}>
+          Go Home
+        </Link>
       </Flex>
       <Progress.Root
         min={1}
-        max={10}
+        max={totalQuestions}
         value={currentQuestionId}
         mt={2}
         colorPalette="pink"

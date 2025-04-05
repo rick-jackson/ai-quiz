@@ -8,8 +8,9 @@ import { useEffect } from "react";
 const HomePage: React.FC = () => {
   useEffect(() => {
     localStorage.removeItem("category");
-    localStorage.removeItem("level");
-    localStorage.removeItem("answersCount");
+    localStorage.removeItem("difficulty");
+    localStorage.removeItem("answerCount");
+    localStorage.removeItem("questionCount");
   }, []);
   return (
     <Box>

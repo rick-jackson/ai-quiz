@@ -1,11 +1,4 @@
-import {
-  AbsoluteCenter,
-  Box,
-  Button,
-  Container,
-  ProgressCircle,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Container, Text, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 type ResultProps = {
@@ -29,11 +22,9 @@ const Result: React.FC<ResultProps> = ({
       textAlign="center"
       display="flex"
       flexDir="column"
-      gap={6}
+      gap={5}
       maxW={500}
     >
-      <Text textStyle="5xl">Result</Text>
-
       <Box
         w={266}
         h={266}
@@ -42,26 +33,20 @@ const Result: React.FC<ResultProps> = ({
         alignItems="center"
         m="auto"
       >
-        <ProgressCircle.Root
-          value={resultPercent}
-          colorPalette="pink"
-          transform="scale(7)"
-        >
-          <ProgressCircle.Circle css={{ "--thickness": "2px" }}>
-            <ProgressCircle.Track />
-            <ProgressCircle.Range strokeLinecap="unset" />
-          </ProgressCircle.Circle>
-          <AbsoluteCenter>
-            <Text as="span" fontSize={10}>
-              {correctUserAnswers}/{allQuestionsCount}
-            </Text>
-          </AbsoluteCenter>
-        </ProgressCircle.Root>
+        <Image
+          src="/images/robot.png"
+          w="100%"
+          objectFit="contain"
+          maxH={550}
+          h="auto"
+        />
       </Box>
-
-      <Text>
-        You got {resultPercent}% of the answers correct. Congratulations!
+      <Text fontWeight={400}>
+        Great job! You answered all <strong>{correctUserAnswers}</strong> out of{" "}
+        <strong>{allQuestionsCount}</strong> questions correctly, which makes{" "}
+        <strong>{resultPercent.toFixed(1)}%</strong>. Keep it up!
       </Text>
+
       <Button size="xl" variant="surface" onClick={onResetQuiz}>
         Пройти знову
       </Button>
