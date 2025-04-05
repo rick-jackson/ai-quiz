@@ -25,25 +25,29 @@ export default async function handler(req, res) {
             {
               parts: [
                 {
-                  text: `Згенеруй 10 запитань з відповідями для квіза на тему: ${prompt}.
-Формат відповіді – тільки масив об'єктів без додаткового тексту.
-Приклад об'єкта:
+                  text: `Generate 10 questions with answers for a quiz on the topic: ${prompt}.
+Answer format – array of objects only, with no additional text.
+The correct answer must appear in a random position within the array.
+Questions must be diverse. Each time you generate them, they must be different.
+Question difficulty: very hard.
+If it is not possible to create questions on the given topic, return only this line:
+"Invalid prompt."
+No other text should be included in the response!
+You may use HTML tags to make the text visually appealing.
+Try to keep the answers approximately the same length.
+language: українська.
+Example object:
 [{
   "id": 1,
-  "question": "Який HTTP-метод зазвичай використовується для отримання даних із сервера?",
-  "title": "Робота з API",
+  "question": "question",
   "answers": [
-    { "id": 1, "text": "<strong>GET</strong>", "isCorrect": true },
-    { "id": 2, "text": "<strong>POST</strong>", "isCorrect": false },
-    { "id": 3, "text": "<strong>DELETE</strong>", "isCorrect": false },
-    { "id": 4, "text": "<strong>PATCH</strong>", "isCorrect": false }
+    { "id": 1, "text": "answer1", "isCorrect": true },
+    { "id": 2, "text": "answer2", "isCorrect": false },
+    { "id": 3, "text": "answer3", "isCorrect": false },
+    { "id": 4, "text": "answer4", "isCorrect": false }
   ]
 }];
-Якщо створити запитання за вказаною темою неможливо, поверни тільки цей рядок:
-"Некоректний запит."
-Жодного іншого тексту у відповіді не має бути!
-можна використовувати html теги, щоб текст виглядав привабливішим.
-Старайся, щоб відповіді були приблизно однієї довжини.`,
+`,
                 },
               ],
             },

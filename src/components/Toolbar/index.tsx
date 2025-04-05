@@ -1,5 +1,6 @@
 import { Box, Flex, IconButton, Progress, Text } from "@chakra-ui/react";
 import { LuArrowLeft } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 type ToolbarProps = {
   currentQuestionId: number;
@@ -9,22 +10,23 @@ type ToolbarProps = {
 
 const Toolbar: React.FC<ToolbarProps> = ({
   currentQuestionId,
-  onPrevQuestion,
+  // onPrevQuestion,
   isFirstQuestion,
 }) => {
   return (
     <Box>
       <Flex alignItems="center" h="36px">
         {!isFirstQuestion && (
-          <IconButton
-            variant="ghost"
-            size="sm"
-            color="white"
-            _hover={{ bg: "bg.secondary" }}
-            onClick={onPrevQuestion}
-          >
-            <LuArrowLeft />
-          </IconButton>
+          <Link to="/">
+            <IconButton
+              variant="ghost"
+              size="sm"
+              color="white"
+              _hover={{ bg: "bg.secondary" }}
+            >
+              <LuArrowLeft />
+            </IconButton>
+          </Link>
         )}
         <Text fontWeight="bold" flex={1} textAlign="center">
           <Text as="span" color="bg.thirty" display="inline">

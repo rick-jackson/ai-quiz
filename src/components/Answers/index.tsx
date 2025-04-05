@@ -1,8 +1,5 @@
-import { Flex, Button, For } from "@chakra-ui/react";
+import { Flex, Button, For, Text } from "@chakra-ui/react";
 import type Quiz from "../../types/quiz";
-import { Prose } from "../ui/prose";
-
-const html = String.raw;
 
 type AnswersProps = {
   answers: Quiz["answers"];
@@ -31,13 +28,7 @@ const Answers: React.FC<AnswersProps> = ({
               answer.isCorrect && { borderColor: "green" })}
             onClick={() => onSelectAnswer(answer.id, answer.isCorrect)}
           >
-            <Prose
-              whiteSpace="normal !important"
-              textAlign="left !important"
-              dangerouslySetInnerHTML={{
-                __html: html`${answer.text}`,
-              }}
-            />
+            <Text>{answer.text}</Text>
           </Button>
         )}
       </For>
