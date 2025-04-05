@@ -18,8 +18,8 @@ const QuizPage: React.FC = () => {
       try {
         const data = await fetchGeminiResponse(
           localStorage.getItem("category") as string,
-          localStorage.getItem("level") as string
-          localStorage.getItem("answersCount") as string
+          localStorage.getItem("level") as string,
+          Number(localStorage.getItem("answersCount"))
         );
         if (!data?.error) {
           setQuiz(data);
