@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const Form: React.FC = () => {
   const [category, setCategory] = useState("");
-  const [answersCount, setAnswersCount] = useState("2");
+  const [answersCount, setAnswersCount] = useState("4");
   const [level, setLevel] = useState("easy");
   const [errors, setErrors] = useState<{
     category?: string;
