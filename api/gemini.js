@@ -7,9 +7,11 @@ export default async function handler(req, res) {
   if (req.method !== "POST")
     return res.status(405).json({ error: "Method Not Allowed" });
 
-  const { prompt } = req.body;
+  const { prompt, level, answersCount } = req.body;
   if (!prompt)
-    return res.status(400).json({ error: "Parameter 'prompt' is required" });
+    return res
+      .status(400)
+      .json({ error: "Parameter 'prompt' is required", status: 400 });
 
   try {
     const apiKey = process.env.API_KEY;
@@ -29,7 +31,8 @@ export default async function handler(req, res) {
 Answer format – array of objects only, with no additional text.
 The correct answer must appear in a random position within the array.
 Questions must be diverse. Each time you generate them, they must be different.
-Question difficulty: very hard.
+Question difficulty: ${level}.
+Number of answers: ${answersCount}.
 If it is not possible to create questions on the given topic, return only this line:
 "Invalid prompt."
 No other text should be included in the response!

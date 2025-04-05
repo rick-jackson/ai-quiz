@@ -3,10 +3,13 @@ import Quiz from "../components/Quiz";
 import { fetchGeminiResponse } from "../gateways/gemini";
 import Loader from "../components/Loader";
 import { Box } from "@chakra-ui/react";
+import Error from "../components/Error";
+
+type ErrorType = { error: string; status: number };
 
 const QuizPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<ErrorType>({} as ErrorType);
   const [quiz, setQuiz] = useState([]);
 
   useEffect(() => {
@@ -14,11 +17,17 @@ const QuizPage: React.FC = () => {
       setLoading(true);
       try {
         const data = await fetchGeminiResponse(
-          localStorage.getItem("category") as string
+          localStorage.getItem("category") as string,
+          localStorage.getItem("level") as string
+          localStorage.getItem("answersCount") as string
         );
-        setQuiz(data);
+        if (!data?.error) {
+          setQuiz(data);
+        } else {
+          setError(data);
+        }
       } catch (error) {
-        setError("error");
+        setError(error as { status: number; error: string });
       } finally {
         setLoading(false);
       }
@@ -32,7 +41,13 @@ const QuizPage: React.FC = () => {
       w="100%"
       bg="linear-gradient(186deg, rgba(113,89,228,1) 0%, rgba(102,79,224,1) 100%)"
     >
-      {loading ? <Loader /> : error ? error : <Quiz quiz={quiz} />}
+      {loading ? (
+        <Loader />
+      ) : !!error?.status ? (
+        <Error {...error} />
+      ) : (
+        <Quiz quiz={quiz} />
+      )}
     </Box>
   );
 };
