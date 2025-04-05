@@ -1,7 +1,7 @@
 export const fetchGeminiResponse = async (
   prompt: string,
-  level = "hard",
-  answersCount = 4
+  level: string,
+  answersCount: number
 ) => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/api/gemini`, {
     method: "POST",
