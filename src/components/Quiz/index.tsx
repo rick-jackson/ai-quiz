@@ -64,44 +64,45 @@ const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
     );
 
   return (
-    <Container
-      py={10}
-      maxW={600}
-      maxH={800}
-      h="100%"
-      display="flex"
-      flexDir="column"
-      m="auto"
-      boxSizing="border-box"
-    >
+    <Container h="100%" display="flex" flexDir="column" p={{ base: 2, md: 10 }}>
       <Toolbar
         currentQuestionId={currentQuestionId}
         totalQuestions={quiz.length}
       />
-      <Box flex="1 auto">
+      <Box
+        mx="auto"
+        w="100%"
+        maxW={800}
+        bg="white"
+        borderRadius={7}
+        color="bg.primary"
+        mt={5}
+        flex="1 auto"
+        display="flex"
+        flexDir="column"
+        p={{ base: 2, md: 10 }}
+      >
         <Question question={currentQuestion!.question} />
         <Answers
           answers={currentQuestion!.answers}
           onSelectAnswer={handleSelectAnswer}
           selectedAnswerId={userAnswers[currentQuestionId]?.id}
         />
+        <Button
+          bg="bg.primary"
+          w="100%"
+          variant="solid"
+          size="2xl"
+          textStyle="xl"
+          mt="auto"
+          loading={loading}
+          borderRadius={7}
+          disabled={!userAnswers[currentQuestionId] || loading}
+          onClick={handleNextQuestion}
+        >
+          Next
+        </Button>
       </Box>
-      <Button
-        variant="subtle"
-        bg="bg.secondary"
-        color="white"
-        fontWeight="bold"
-        size="2xl"
-        mt="auto"
-        _hover={{
-          bg: "bg.primaryHover",
-        }}
-        loading={loading}
-        disabled={!userAnswers[currentQuestionId] || loading}
-        onClick={handleNextQuestion}
-      >
-        Next
-      </Button>
     </Container>
   );
 };

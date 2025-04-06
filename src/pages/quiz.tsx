@@ -38,12 +38,7 @@ const QuizPage: React.FC = () => {
   }, []);
 
   return (
-    <Box
-      display="flex"
-      h="100%"
-      w="100%"
-      bg="linear-gradient(186deg, rgba(113,89,228,1) 0%, rgba(102,79,224,1) 100%)"
-    >
+    <Box display="flex" h="100%" w="100%" bg="#584db9">
       {loading ? (
         <Loader />
       ) : !!error?.error ? (

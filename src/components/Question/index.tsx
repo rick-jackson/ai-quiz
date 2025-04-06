@@ -10,10 +10,11 @@ const Question: React.FC<QuestionProps> = ({ question }) => {
   return (
     <Prose
       textStyle="3xl"
-      fontWeight="medium"
-      fontSize="clamp(2rem, 4vw, 4vh)"
-      textAlign="center"
-      mt={5}
+      fontWeight={600}
+      fontSize="clamp(1.5rem, 4vw, 4vh)"
+      lineHeight={1.1}
+      textAlign={{ base: "left", md: "center" }}
+      color="#3b2f6f"
       dangerouslySetInnerHTML={{
         __html: html`${question}`,
       }}

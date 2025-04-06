@@ -1,4 +1,4 @@
-import { Box, Flex, Progress, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -10,7 +10,6 @@ type ToolbarProps = {
 
 const Toolbar: React.FC<ToolbarProps> = ({
   currentQuestionId,
-
   totalQuestions,
 }) => {
   const [timer, setTimer] = useState(0);
@@ -30,33 +29,30 @@ const Toolbar: React.FC<ToolbarProps> = ({
   };
 
   return (
-    <Box>
-      <Flex alignItems="center" h="36px">
+    <Box maxW={800} marginX="auto" w="100%">
+      <Flex alignItems="center" h="36px" gap={5} justify="space-between">
         <Flex alignItems="center" gap={2}>
           <LuTimer size={24} />
           <Text fontWeight="bold">{formatTime(timer)}</Text>
         </Flex>
-        <Text fontWeight="bold" flex={1} textAlign="center">
-          <Text as="span" color="bg.thirty" display="inline">
-            {currentQuestionId}
-          </Text>{" "}
-          / {totalQuestions}
-        </Text>
-        <Link to="/" color="white" style={{ fontWeight: 500 }}>
+        <Box w="100%">
+          <Box
+            h={1}
+            bg="#8b7cd8"
+            w={`${(currentQuestionId / totalQuestions) * 100}%`}
+            borderRadius={20}
+            mr="auto"
+            transition="0.3s"
+          />
+        </Box>
+        <Link
+          to="/"
+          color="white"
+          style={{ fontWeight: 500, whiteSpace: "nowrap" }}
+        >
           Go Home
         </Link>
       </Flex>
-      <Progress.Root
-        min={1}
-        max={totalQuestions}
-        value={currentQuestionId}
-        mt={2}
-        colorPalette="pink"
-      >
-        <Progress.Track>
-          <Progress.Range />
-        </Progress.Track>
-      </Progress.Root>
     </Box>
   );
 };

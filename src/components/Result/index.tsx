@@ -1,4 +1,4 @@
-import { Box, Button, Container, Text, Image } from "@chakra-ui/react";
+import { Button, Container, Text, Image, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 type ResultProps = {
@@ -22,58 +22,55 @@ const Result: React.FC<ResultProps> = ({
       textAlign="center"
       display="flex"
       flexDir="column"
-      gap={5}
-      maxW={500}
+      maxW={800}
+      p={{ base: 2, md: 10 }}
     >
-      <Box
-        w={266}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        m="auto"
-      >
-        <Image
-          src={`/robot/${
-            resultPercent <= 50 ? 5 : resultPercent <= 75 ? 6 : 4
-          }.png`}
-        />
-      </Box>
+      <Image
+        src={`/robot/${
+          resultPercent < 50 ? 7 : resultPercent < 75 ? 8 : 9
+        }.png`}
+        maxH="40vh"
+        w="auto"
+        objectFit="contain"
+      />
+
       <Text fontWeight={400} textStyle="xl">
         {resultPercent >= 75 ? (
           <>
             Great job! You answered all <strong>{correctUserAnswers}</strong>{" "}
             out of <strong>{allQuestionsCount}</strong> questions correctly,
-            which makes <strong>{resultPercent.toFixed(1)}%</strong>. Keep it
+            which makes <strong>{resultPercent.toFixed(0)}%</strong>. Keep it
             up!
           </>
         ) : resultPercent >= 50 ? (
           <>
             Nice try! You got <strong>{correctUserAnswers}</strong> out of{" "}
             <strong>{allQuestionsCount}</strong> questions right — that's{" "}
-            <strong>{resultPercent.toFixed(1)}%</strong>. Just a little more and
+            <strong>{resultPercent.toFixed(0)}%</strong>. Just a little more and
             you'll ace it next time!
           </>
         ) : (
           <>
             Don't worry! You answered <strong>{correctUserAnswers}</strong> out
             of <strong>{allQuestionsCount}</strong> questions correctly — that’s{" "}
-            <strong>{resultPercent.toFixed(1)}%</strong>%. Review the material
+            <strong>{resultPercent.toFixed(0)}%</strong>. Review the material
             and give it another shot!
           </>
         )}
       </Text>
-
-      <Button size="xl" variant="surface" onClick={onResetQuiz}>
-        Пройти знову
-      </Button>
-      <Button size="xl" variant="surface" onClick={getQuizData}>
-        Оновити запитання
-      </Button>
-      <Link to="/#categories" style={{ display: "flex" }}>
-        <Button size="xl" variant="surface" flex={1}>
-          Змінити тему
+      <Flex flexDir="column" gap={3} mt={5}>
+        <Button size="xl" variant="surface" onClick={onResetQuiz}>
+          Pass again
         </Button>
-      </Link>
+        <Button size="xl" variant="surface" onClick={getQuizData}>
+          Update question
+        </Button>
+        <Link to="/#categories" style={{ display: "flex" }}>
+          <Button size="xl" variant="surface" flex={1}>
+            Change the topic
+          </Button>
+        </Link>
+      </Flex>
     </Container>
   );
 };
