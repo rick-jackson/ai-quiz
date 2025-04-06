@@ -100,7 +100,6 @@ const Form: React.FC = () => {
           />
           <Field.ErrorText color="red">{formErrors.category}</Field.ErrorText>
         </Field.Root>
-
         <Field.Root invalid>
           <Field.Label>Number of answers</Field.Label>
           <Input
@@ -151,6 +150,14 @@ const Form: React.FC = () => {
           colorPalette="whiteAlpha"
           onValueChange={(e) => setDifficulty(e.value!)}
         >
+          <RadioGroup.Label
+            display="block"
+            textAlign="left"
+            fontWeight={600}
+            mb={2}
+          >
+            Difficulty level
+          </RadioGroup.Label>
           <Grid
             templateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(4, auto)" }}
             gap={5}

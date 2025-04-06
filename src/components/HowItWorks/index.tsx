@@ -3,15 +3,15 @@ import Container from "../Container";
 
 const howItWorks = [
   {
-    image: "robot3.png",
+    image: "1.png",
     text: "Choose a topic from the ones offered, or create your own",
   },
   {
-    image: "robot1.png",
+    image: "2.png",
     text: "AI generates questions based on chosen category",
   },
   {
-    image: "robot2.png",
+    image: "3.png",
     text: "Get the result of your passage",
   },
 ];
