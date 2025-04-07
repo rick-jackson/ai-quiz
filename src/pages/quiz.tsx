@@ -19,7 +19,8 @@ const QuizPage: React.FC = () => {
         localStorage.getItem("category") as string,
         (localStorage.getItem("difficulty") as string) || "Very Hard",
         Number(localStorage.getItem("answerCount")) || 4,
-        Number(localStorage.getItem("questionCount")) || 10
+        Number(localStorage.getItem("questionCount")) || 10,
+        localStorage.getItem("language") || "English"
       );
       console.log(data);
       if (!data?.error) {

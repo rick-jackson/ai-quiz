@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   if (req.method !== "POST")
     return res.status(405).json({ error: "Method Not Allowed" });
 
-  const { prompt, difficulty, answerCount, questionCount } = req.body;
+  const { prompt, difficulty, answerCount, questionCount, language } = req.body;
   if (!prompt)
     return res
       .status(400)
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                   Generate a set of ${questionCount} quiz questions on the topic: ${prompt}.
 
 Requirements:
-- Language: українська
+- Language: ${language}
 - Format: JSON array of objects only (NO other text or explanation)
 - Each object structure must follow this format:
   {

@@ -8,6 +8,8 @@ import {
 
 type CustomSelectProps = {
   options: { code: string; name: string }[];
+  value: string;
+  onChange: (value: string) => void;
 };
 
 const SelectValue = () => {
@@ -29,19 +31,26 @@ const SelectValue = () => {
   );
 };
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ options }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  options,
+  value,
+  onChange,
+}) => {
   const members = createListCollection({
     items: options,
     itemToString: (item) => item.name,
-    itemToValue: (item) => item.code,
+    itemToValue: (item) => item.name,
   });
 
   return (
     <Select.Root
       collection={members}
       size="lg"
-      defaultValue={["GB"]}
+      defaultValue={[value]}
       positioning={{ sameWidth: true }}
+      onChange={(e) => {
+        onChange((e.target as HTMLSelectElement).value);
+      }}
     >
       <Select.HiddenSelect />
       <Select.Label textAlign="left">Select language</Select.Label>

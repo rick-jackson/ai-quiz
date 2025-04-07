@@ -29,11 +29,21 @@ const inputStyles: InputProps = {
 };
 
 const Form: React.FC = () => {
-  const [category, setCategory] = useState("");
-  const [answerCount, setAnswerCount] = useState("4");
-  const [questionCount, setQuestionCount] = useState("10");
-  const [difficulty, setDifficulty] = useState("Easy");
-  // const [language, setLanguage] = useState("GB");
+  const [category, setCategory] = useState(
+    localStorage.getItem("category") || ""
+  );
+  const [answerCount, setAnswerCount] = useState(
+    localStorage.getItem("answerCount") || "4"
+  );
+  const [questionCount, setQuestionCount] = useState(
+    localStorage.getItem("questionCount") || "10"
+  );
+  const [difficulty, setDifficulty] = useState(
+    localStorage.getItem("difficulty") || "Easy"
+  );
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "English"
+  );
 
   const [formErrors, setFormErrors] = useState<{
     category?: string;
@@ -72,6 +82,7 @@ const Form: React.FC = () => {
     localStorage.setItem("answerCount", answerCount);
     localStorage.setItem("questionCount", questionCount);
     localStorage.setItem("difficulty", difficulty);
+    localStorage.setItem("language", language);
 
     navigate("/quiz");
   };
@@ -86,7 +97,11 @@ const Form: React.FC = () => {
         mx="auto"
         onSubmit={handleSubmit}
       >
-        <CustomSelect options={promptLanguages} />
+        <CustomSelect
+          options={promptLanguages}
+          value={language}
+          onChange={(value: string) => setLanguage(value)}
+        />
         <Field.Root invalid>
           <Field.Label>Category</Field.Label>
           <Input
