@@ -10,6 +10,8 @@ import {
 import Container from "../Container";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CustomSelect from "./Select";
+import { promptLanguages } from "../../common/data/promptLanguages";
 
 const inputStyles: InputProps = {
   borderRadius: 15,
@@ -31,6 +33,7 @@ const Form: React.FC = () => {
   const [answerCount, setAnswerCount] = useState("4");
   const [questionCount, setQuestionCount] = useState("10");
   const [difficulty, setDifficulty] = useState("Easy");
+  // const [language, setLanguage] = useState("GB");
 
   const [formErrors, setFormErrors] = useState<{
     category?: string;
@@ -83,6 +86,7 @@ const Form: React.FC = () => {
         mx="auto"
         onSubmit={handleSubmit}
       >
+        <CustomSelect options={promptLanguages} />
         <Field.Root invalid>
           <Field.Label>Category</Field.Label>
           <Input
@@ -171,7 +175,6 @@ const Form: React.FC = () => {
             ))}
           </Grid>
         </RadioGroup.Root>
-
         <Button size="2xl" borderRadius={15} bg="blue.900" type="submit">
           Generate
         </Button>

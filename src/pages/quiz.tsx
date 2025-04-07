@@ -21,13 +21,17 @@ const QuizPage: React.FC = () => {
         Number(localStorage.getItem("answerCount")) || 4,
         Number(localStorage.getItem("questionCount")) || 10
       );
+      console.log(data);
       if (!data?.error) {
         setQuiz(data);
       } else {
         setError(data);
       }
     } catch (error) {
-      setError(error as { status: number; error: string });
+      setError({ error: "Server Error", status: 500 } as {
+        status: number;
+        error: string;
+      });
     } finally {
       setLoading(false);
     }
