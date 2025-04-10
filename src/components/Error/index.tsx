@@ -11,7 +11,7 @@ const Error: React.FC<ErrorProps> = ({ status = 500, error }) => {
       <EmptyState.Content>
         <EmptyState.Indicator>
           <Image
-            src="/robot/robot6.png"
+            src="/robot/broken.png"
             w="100%"
             objectFit="contain"
             maxH={550}
@@ -19,8 +19,10 @@ const Error: React.FC<ErrorProps> = ({ status = 500, error }) => {
           />
         </EmptyState.Indicator>
         <VStack textAlign="center">
-          <EmptyState.Title fontSize="42px">ERROR: {status}</EmptyState.Title>
-          <EmptyState.Description>{error}</EmptyState.Description>
+          <EmptyState.Title fontSize="42px"> {error}</EmptyState.Title>
+          <EmptyState.Description color="white" textStyle="4xl">
+            Status: {status}
+          </EmptyState.Description>
         </VStack>
       </EmptyState.Content>
     </EmptyState.Root>
