@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Quiz from "../components/Quiz";
 import { fetchGeminiResponse } from "../gateways/gemini";
 import Loader from "../components/Loader";
-import { Box } from "@chakra-ui/react";
 import Error from "../components/Error";
 
 type ErrorType = { error: string; status: number };
@@ -42,17 +41,10 @@ const QuizPage: React.FC = () => {
     getQuizData();
   }, []);
 
-  return (
-    <Box display="flex" h="100%" w="100%" bg="#584db9">
-      {loading ? (
-        <Loader />
-      ) : !!error?.error ? (
-        <Error {...error} />
-      ) : (
-        <Quiz quiz={quiz} getQuizData={getQuizData} />
-      )}
-    </Box>
-  );
+  if (loading) return <Loader />;
+  if (!!error?.error) return <Error {...error} />;
+
+  return <Quiz quiz={quiz} getQuizData={getQuizData} />;
 };
 
 export default QuizPage;
