@@ -33,9 +33,9 @@ const CategoryGrid: React.FC<{
           fontWeight={500}
           transition="0.2s"
           cursor="pointer"
-          onClick={() =>
-            navigate(category.name.toLowerCase(), { preventScrollReset: true })
-          }
+          onClick={() => {
+            navigate(category.name.toLowerCase());
+          }}
           _hover={{ transform: "scale(1.05)" }}
         >
           <Card.Body>
