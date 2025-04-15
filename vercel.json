@@ -4,6 +4,10 @@
     {
       "source": "/api/(.*)",
       "destination": "/api/gemini.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
