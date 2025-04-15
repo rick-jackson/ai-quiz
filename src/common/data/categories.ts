@@ -20,3 +20,22 @@ export const categories = [
   { name: "Travel", icon: "./categories/travel.png" },
   { name: "Zoology", icon: "./categories/zoology.png" },
 ];
+
+export const pages = {
+  history: {
+    img: "/images/history.png",
+    title: "History",
+  },
+  zoology: {
+    img: "/images/zoology.png",
+    title: "Zoology",
+  },
+  literature: {
+    img: "/images/literature.png",
+    title: "Literature",
+  },
+  medicine: {
+    img: "/images/medicine.png",
+    title: "Medicine",
+  },
+} as const;
