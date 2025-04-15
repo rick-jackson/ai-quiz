@@ -35,6 +35,9 @@ const config = defineConfig({
     a: {
       textDecoration: "none",
     },
+    // '.custom-collapsible[data-state="open"]': {
+    //   gridRow: "span 3 / span 3",
+    // },
   },
 });
 

@@ -1,3 +1,5 @@
+import { medicalTopics } from "./medicine";
+
 export const categories = [
   { name: "Art", icon: "./categories/art.png" },
   { name: "Chemistry", icon: "./categories/chemistry.png" },
@@ -21,21 +23,32 @@ export const categories = [
   { name: "Zoology", icon: "./categories/zoology.png" },
 ];
 
-export const pages = {
+export const pages: Record<
+  string,
+  {
+    img: string;
+    title: string;
+    topics: { title: string; subtopics: string[] }[];
+  }
+> = {
   history: {
     img: "/images/history.png",
     title: "History",
+    topics: [],
   },
   zoology: {
     img: "/images/zoology.png",
     title: "Zoology",
+    topics: [],
   },
   literature: {
     img: "/images/literature.png",
     title: "Literature",
+    topics: [],
   },
   medicine: {
     img: "/images/medicine.png",
     title: "Medicine",
+    topics: medicalTopics,
   },
-} as const;
+};
