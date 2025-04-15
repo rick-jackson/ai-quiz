@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { pages } from "../common/data/categories";
 import PageNotFound from "../components/404";
 import {
@@ -12,6 +12,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { splitArray } from "../common/data/utils/splitArray";
+import { useEffect } from "react";
 
 const Category: React.FC = () => {
   const location = useLocation();
@@ -19,6 +20,14 @@ const Category: React.FC = () => {
   const currentSize = useBreakpointValue({
     md: "md",
   });
+
+  const isMobile = currentSize !== "md";
+  const navigateTo = useNavigate();
+
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   if (!category) return <PageNotFound />;
 
@@ -44,7 +53,7 @@ const Category: React.FC = () => {
       </Box>
       <Container py={5}>
         <Flex justify="space-between" gap={10}>
-          {splitArray(currentSize === "md" ? 2 : 1, category.topics).map(
+          {splitArray(!isMobile ? 2 : 1, category.topics).map(
             (column, index) => (
               <List.Root key={index} variant="plain" gap={5} w="100%">
                 {column.map((topic) => (
@@ -75,7 +84,21 @@ const Category: React.FC = () => {
                       <Collapsible.Content p={5}>
                         <List.Root variant="plain" gap={3}>
                           {topic.subtopics.map((subtopic) => (
-                            <List.Item key={subtopic} textStyle="xl">
+                            <List.Item
+                              key={subtopic}
+                              textStyle="xl"
+                              cursor="pointer"
+                              _hover={{
+                                textDecoration: "underline",
+                              }}
+                              onClick={() => {
+                                navigateTo("/quiz");
+                                localStorage.setItem(
+                                  "category",
+                                  `${category.title}: ${subtopic}`
+                                );
+                              }}
+                            >
                               {subtopic}
                             </List.Item>
                           ))}
