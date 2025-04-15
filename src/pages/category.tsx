@@ -33,17 +33,13 @@ const Category: React.FC = () => {
         backgroundRepeat="no-repeat"
         minH="30vh"
         alignItems="flex-end"
+        boxShadow="inset 0px -100px 57px -85px rgba(88, 77, 185, 1)"
       >
-        <Box
-          boxShadow="inset 0px -47px 48px 13px rgba(88, 77, 185, 1)"
-          w="100%"
-        >
-          <Container py={5}>
-            <Text textStyle="5xl" fontWeight={500}>
-              {category.title}
-            </Text>
-          </Container>
-        </Box>
+        <Container>
+          <Text textStyle="5xl" fontWeight={500}>
+            {category.title}
+          </Text>
+        </Container>
       </Box>
       <Container py={5}>
         <Flex justify="space-between" gap={10}>
