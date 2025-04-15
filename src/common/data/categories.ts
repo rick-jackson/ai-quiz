@@ -46,6 +46,16 @@ export const pages: Record<
     title: "Literature",
     topics: [],
   },
+  mathematic: {
+    img: "/images/mathematic.png",
+    title: "Mathematic",
+    topics: [],
+  },
+  chemistry: {
+    img: "/images/chemistry.png",
+    title: "Chemistry",
+    topics: [],
+  },
   medicine: {
     img: "/images/medicine.png",
     title: "Medicine",

@@ -34,6 +34,7 @@ const Category: React.FC = () => {
         minH="30vh"
         alignItems="flex-end"
         boxShadow="inset 0px -150px 57px -85px rgba(88, 77, 185, 1)"
+        backgroundPositionY="top"
       >
         <Container>
           <Text textStyle="5xl" fontWeight={500}>
