@@ -38,7 +38,7 @@ const Category: React.FC = () => {
           boxShadow="inset 0px -47px 48px 13px rgba(88, 77, 185, 1)"
           w="100%"
         >
-          <Container>
+          <Container py={5}>
             <Text textStyle="5xl" fontWeight={500}>
               {category.title}
             </Text>
