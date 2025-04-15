@@ -53,9 +53,6 @@ const Category: React.FC = () => {
                     key={topic.title}
                     bg="whiteAlpha.100"
                     borderColor="whiteAlpha.300"
-                    textStyle="2xl"
-                    fontWeight={500}
-                    cursor="pointer"
                     color="white"
                   >
                     <Collapsible.Root
@@ -70,16 +67,19 @@ const Category: React.FC = () => {
                         py={6}
                         textAlign="left"
                         cursor="pointer"
+                        textStyle="2xl"
+                        fontWeight={500}
                       >
                         {topic.title}
                       </Collapsible.Trigger>
-                      <Collapsible.Content>
-                        <Box padding="4">
-                          If you inspect the DOM, you'll notice that the content
-                          is unmounted when collapsed. This is useful for
-                          performance reasons when you have a lot of collapsible
-                          content.
-                        </Box>
+                      <Collapsible.Content p={5}>
+                        <List.Root variant="plain" gap={3}>
+                          {topic.subtopics.map((subtopic) => (
+                            <List.Item key={subtopic} textStyle="xl">
+                              {subtopic}
+                            </List.Item>
+                          ))}
+                        </List.Root>
                       </Collapsible.Content>
                     </Collapsible.Root>
                   </Card.Root>
