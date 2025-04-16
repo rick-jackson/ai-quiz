@@ -1,4 +1,9 @@
-import { Button, Container, Text, Image, Flex } from "@chakra-ui/react";
+import { Container, Image, Box, Button, Flex, Text } from "@chakra-ui/react";
+import Chart from "react-apexcharts";
+import { useMemo } from "react";
+import { FaRepeat } from "react-icons/fa6";
+import { TbReload } from "react-icons/tb";
+import { FaExchangeAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 type ResultProps = {
@@ -8,6 +13,92 @@ type ResultProps = {
   getQuizData: () => Promise<void>;
 };
 
+const getChartOptions = (percent: number) => ({
+  series: [percent],
+  options: {
+    chart: {
+      height: "250px",
+      minHeight: 0,
+      sparkline: {
+        enabled: true,
+      },
+    },
+    plotOptions: {
+      radialBar: {
+        startAngle: -135,
+        endAngle: 225,
+        hollow: {
+          margin: 0,
+          size: "70%",
+          background: "#fff",
+          dropShadow: {
+            enabled: true,
+          },
+        },
+        track: {
+          background: "#fff",
+          strokeWidth: "67%",
+          margin: 0,
+          dropShadow: {
+            enabled: true,
+          },
+        },
+
+        dataLabels: {
+          name: {
+            show: false,
+          },
+          value: {
+            formatter: function (val: any) {
+              return `${parseInt(val)}%`;
+            },
+            show: true,
+          },
+        },
+      },
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        gradientToColors: ["#584db9"],
+        stops: [0, 100],
+      },
+    },
+    stroke: {
+      lineCap: "round",
+    },
+  },
+});
+
+const getResultMessage = (correct: number, total: number, percent: number) => {
+  const formattedPercent = percent.toFixed(0);
+  if (percent >= 75) {
+    return (
+      <>
+        You answered all <strong>{correct}</strong> out of{" "}
+        <strong>{total}</strong> questions correctly, which makes{" "}
+        <strong>{formattedPercent}%</strong>. Keep it up!
+      </>
+    );
+  } else if (percent >= 50) {
+    return (
+      <>
+        You got <strong>{correct}</strong> out of <strong>{total}</strong>{" "}
+        questions right — that's <strong>{formattedPercent}%</strong>. Just a
+        little more and you'll ace it next time!
+      </>
+    );
+  } else {
+    return (
+      <>
+        You answered <strong>{correct}</strong> out of <strong>{total}</strong>{" "}
+        questions correctly — that’s <strong>{formattedPercent}%</strong>.
+        Review the material and give it another shot!
+      </>
+    );
+  }
+};
+
 const Result: React.FC<ResultProps> = ({
   allQuestionsCount,
   correctUserAnswers,
@@ -15,63 +106,70 @@ const Result: React.FC<ResultProps> = ({
   getQuizData,
 }) => {
   const resultPercent = (correctUserAnswers / allQuestionsCount) * 100;
+  const chartData = useMemo(
+    () => getChartOptions(resultPercent),
+    [resultPercent]
+  );
 
   return (
-    <Container
-      m="auto"
-      textAlign="center"
-      display="flex"
-      flexDir="column"
-      maxW={800}
-      p={{ base: 2, md: 10 }}
+    <Box
+      bg="linear-gradient(186deg, rgba(113,89,228,1) 0%, rgba(102,79,224,1) 100%)"
+      w="100%"
+      h="100%"
     >
-      <Image
-        src={`/robot/${
-          resultPercent < 50 ? 7 : resultPercent < 75 ? 8 : 9
-        }.png`}
-        maxH="40vh"
-        w="auto"
-        objectFit="contain"
-      />
-
-      <Text fontWeight={400} textStyle="xl">
-        {resultPercent >= 75 ? (
-          <>
-            Great job! You answered all <strong>{correctUserAnswers}</strong>{" "}
-            out of <strong>{allQuestionsCount}</strong> questions correctly,
-            which makes <strong>{resultPercent.toFixed(0)}%</strong>. Keep it
-            up!
-          </>
-        ) : resultPercent >= 50 ? (
-          <>
-            Nice try! You got <strong>{correctUserAnswers}</strong> out of{" "}
-            <strong>{allQuestionsCount}</strong> questions right — that's{" "}
-            <strong>{resultPercent.toFixed(0)}%</strong>. Just a little more and
-            you'll ace it next time!
-          </>
-        ) : (
-          <>
-            Don't worry! You answered <strong>{correctUserAnswers}</strong> out
-            of <strong>{allQuestionsCount}</strong> questions correctly — that’s{" "}
-            <strong>{resultPercent.toFixed(0)}%</strong>. Review the material
-            and give it another shot!
-          </>
-        )}
-      </Text>
-      <Flex flexDir="column" gap={3} mt={5}>
-        <Button size="xl" variant="surface" onClick={onResetQuiz}>
-          Pass again
-        </Button>
-        <Button size="xl" variant="surface" onClick={getQuizData}>
-          Update question
-        </Button>
-        <Link to="/#categories" style={{ display: "flex" }}>
-          <Button size="xl" variant="surface" flex={1}>
-            Change the topic
-          </Button>
-        </Link>
-      </Flex>
-    </Container>
+      <Container display="flex" pt={60} alignItems="flex-end" h="100%">
+        <Box position="relative" w="100%" maxW={800} m="auto" h="100%" pb={5}>
+          <Image
+            src={`/robot/result-cool.png`}
+            position="absolute"
+            top="-210px"
+            left="calc(50% - 150px)"
+            maxW={300}
+          />
+          <Box
+            color="#000"
+            p={5}
+            borderRadius={5}
+            bg="white"
+            display="flex"
+            flexDir="column"
+          >
+            <Chart
+              //@ts-ignore
+              options={chartData.options}
+              series={chartData.series}
+              type="radialBar"
+              height={300}
+            />
+            <Box maxW={400} m="auto" textAlign="center" mb={5}>
+              <Text fontWeight={400} textStyle="xl">
+                {getResultMessage(
+                  correctUserAnswers,
+                  allQuestionsCount,
+                  resultPercent
+                )}
+              </Text>
+            </Box>
+            <Flex mt="auto" direction="column" gap={3} textAlign="left">
+              <Button bg="blue.700" size="lg" onClick={onResetQuiz}>
+                <FaRepeat />
+                Пройти ще раз
+              </Button>
+              <Button bg="blue.700" size="lg" onClick={getQuizData}>
+                <TbReload />
+                Оновити запитання
+              </Button>
+              <Link to="/#categories" style={{ width: "100%" }}>
+                <Button bg="blue.700" size="lg" w="100%">
+                  <FaExchangeAlt />
+                  Змінити тему
+                </Button>
+              </Link>
+            </Flex>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

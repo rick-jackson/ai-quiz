@@ -21,7 +21,6 @@ const QuizPage: React.FC = () => {
         Number(localStorage.getItem("questionCount")) || 10,
         localStorage.getItem("language") || "English"
       );
-      console.log(data);
       if (!data?.error) {
         setQuiz(data);
       } else {

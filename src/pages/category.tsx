@@ -94,7 +94,7 @@ const Category: React.FC = () => {
                           py={6}
                           textAlign="left"
                           cursor="pointer"
-                          textStyle="2xl"
+                          textStyle="xl"
                           fontWeight={500}
                         >
                           {topic.title}
