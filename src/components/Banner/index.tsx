@@ -4,7 +4,7 @@ import { HashLink } from "react-router-hash-link";
 const Banner: React.FC = () => {
   return (
     <Box
-      bg="linear-gradient(63deg, rgba(163,156,239,1) 0%, rgba(105,99,242,1) 100%)"
+      bg="linear-gradient(63deg, rgba(163,156,239,1) 0%, #6963f2 100%)"
       pt="48px"
     >
       <Container

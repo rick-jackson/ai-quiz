@@ -11,7 +11,7 @@ import Container from "../Container";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomSelect from "./Select";
-import { promptLanguages } from "../../common/data/promptLanguages";
+import { promptLanguages } from "../../common/configs/languages";
 
 const inputStyles: InputProps = {
   borderRadius: 15,

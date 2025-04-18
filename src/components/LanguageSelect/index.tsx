@@ -8,7 +8,7 @@ import {
   IconButton,
   Portal,
 } from "@chakra-ui/react";
-import { promptLanguages } from "../../common/data/promptLanguages";
+import { promptLanguages } from "../../common/configs/languages";
 
 const SelectTrigger = () => {
   const select = useSelectContext();

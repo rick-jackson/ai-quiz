@@ -6,7 +6,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import Container from "../Container";
-import { categories } from "../../common/data/categories";
+import { categories } from "../../common/configs/categories";
 import { useNavigate } from "react-router-dom";
 
 const CategoryGrid: React.FC<{

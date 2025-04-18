@@ -1,4 +1,4 @@
-import { medicalTopics } from "./medicine";
+import { medicalTopics } from "../data/medicine";
 
 export const categories = [
   { name: "Art", icon: "./categories/art.png" },

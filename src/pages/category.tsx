@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { pages } from "../common/data/categories";
+import { pages } from "../common/configs/categories";
 import PageNotFound from "../components/404";
 import {
   Box,
@@ -11,7 +11,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { splitArray } from "../common/data/utils/splitArray";
+import { splitArray } from "../common/configs/utils/splitArray";
 import { useEffect } from "react";
 import Layout from "../components/Layout";
 
