@@ -1,4 +1,9 @@
+import { artTopics } from "../data/art";
 import { medicalTopics } from "../data/medicine";
+import { chemistryTopics } from "./chemistry";
+import { foodTopics } from "./food";
+import { geographyTopics } from "./geography";
+import { historyTopics } from "./history";
 
 export const categories = [
   { name: "Art", icon: "./categories/art.png" },
@@ -12,7 +17,7 @@ export const categories = [
   { name: "Mathematic", icon: "./categories/mathematic.png" },
   { name: "Medicine", icon: "./categories/medicine.png" },
   {
-    name: "Philosopny and Religion",
+    name: "Philosopny-and-Religion",
     icon: "./categories/philosophy-and-religion.png",
   },
   { name: "Policy", icon: "./categories/policy.png" },
@@ -34,7 +39,7 @@ export const pages: Record<
   history: {
     img: "/images/history.png",
     title: "History",
-    topics: [],
+    topics: historyTopics,
   },
   zoology: {
     img: "/images/zoology.png",
@@ -54,7 +59,7 @@ export const pages: Record<
   chemistry: {
     img: "/images/chemistry.png",
     title: "Chemistry",
-    topics: [],
+    topics: chemistryTopics,
   },
   technologies: {
     img: "/images/technologies.png",
@@ -69,7 +74,7 @@ export const pages: Record<
   food: {
     img: "/images/food.png",
     title: "Food",
-    topics: [],
+    topics: foodTopics,
   },
   logic: {
     img: "/images/logic.png",
@@ -84,16 +89,26 @@ export const pages: Record<
   geography: {
     img: "/images/geography.png",
     title: "Geography",
-    topics: [],
+    topics: geographyTopics,
   },
   art: {
     img: "/images/art.png",
     title: "Art",
-    topics: [],
+    topics: artTopics,
   },
   medicine: {
     img: "/images/medicine.png",
     title: "Medicine",
     topics: medicalTopics,
+  },
+  travel: {
+    img: "/images/travel.png",
+    title: "Travel",
+    topics: [],
+  },
+  "philosopny-and-religion": {
+    img: "/images/philosopny-and-religion.png",
+    title: "Philosophy and Religion",
+    topics: [],
   },
 };
