@@ -56,6 +56,41 @@ export const pages: Record<
     title: "Chemistry",
     topics: [],
   },
+  technologies: {
+    img: "/images/technologies.png",
+    title: "Technologies",
+    topics: [],
+  },
+  space: {
+    img: "/images/space.png",
+    title: "Space",
+    topics: [],
+  },
+  food: {
+    img: "/images/food.png",
+    title: "Food",
+    topics: [],
+  },
+  logic: {
+    img: "/images/logic.png",
+    title: "Logic",
+    topics: [],
+  },
+  policy: {
+    img: "/images/policy.png",
+    title: "Policy",
+    topics: [],
+  },
+  geography: {
+    img: "/images/geography.png",
+    title: "Geography",
+    topics: [],
+  },
+  art: {
+    img: "/images/art.png",
+    title: "Art",
+    topics: [],
+  },
   medicine: {
     img: "/images/medicine.png",
     title: "Medicine",

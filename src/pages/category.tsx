@@ -35,21 +35,15 @@ const Category: React.FC = () => {
   if (!category) return <PageNotFound />;
 
   return (
-    <>
-      <Container
-        as="header"
-        position="absolute"
-        width="100%"
-        py={4}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Button variant="ghost" size="2xl" p={0} h={5} minW={5}>
-          <GiHamburgerMenu />
-        </Button>
-        <LanguageSelect />
-      </Container>
+    <Box>
+      <Box as="header" w="100%" position="absolute">
+        <Container justifyContent="space-between" display="flex" py={3}>
+          <Button variant="ghost" size="2xl" p={0} h={5} minW={5}>
+            <GiHamburgerMenu color="#584db9" />
+          </Button>
+          <LanguageSelect />
+        </Container>
+      </Box>
       <Box bg="#584db9" h="100%">
         <Box
           bgImage={`url(${category.img})`}
@@ -131,7 +125,7 @@ const Category: React.FC = () => {
           </Flex>
         </Container>
       </Box>
-    </>
+    </Box>
   );
 };
 
