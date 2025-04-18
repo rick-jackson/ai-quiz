@@ -88,7 +88,7 @@ const Form: React.FC = () => {
   };
 
   return (
-    <Container title="Or Enter Your Own Category">
+    <Container title="Or Enter Your Own Category" id="generation">
       <Flex
         as="form"
         direction="column"

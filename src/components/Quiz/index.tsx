@@ -64,7 +64,13 @@ const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
     );
 
   return (
-    <Container h="100%" display="flex" flexDir="column" p={{ base: 2, md: 10 }}>
+    <Container
+      h="100%"
+      display="flex"
+      flexDir="column"
+      p={{ base: 2, md: 10 }}
+      pt="48px"
+    >
       <Toolbar
         currentQuestionId={currentQuestionId}
         totalQuestions={quiz.length}
@@ -72,7 +78,6 @@ const Quiz: React.FC<QuizProps> = ({ quiz, getQuizData }) => {
       <Box
         mx="auto"
         w="100%"
-        maxW={800}
         bg="white"
         borderRadius={7}
         color="bg.primary"

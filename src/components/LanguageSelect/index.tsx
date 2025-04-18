@@ -14,7 +14,13 @@ const SelectTrigger = () => {
   const select = useSelectContext();
   const items = select.selectedItems;
   return (
-    <IconButton variant="plain" h={6} minW={8} {...select.getTriggerProps()}>
+    <IconButton
+      variant="plain"
+      h={6}
+      minW={8}
+      border={0}
+      {...select.getTriggerProps()}
+    >
       <Image
         src={`https://flagcdn.com/w320/${items[0]?.code.toLowerCase()}.png`}
         alt={items[0]?.code}

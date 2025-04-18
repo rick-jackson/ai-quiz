@@ -3,6 +3,7 @@ import Quiz from "../components/Quiz";
 import { fetchGeminiResponse } from "../gateways/gemini";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+import Layout from "../components/Layout";
 
 type ErrorType = { error: string; status: number };
 
@@ -43,7 +44,11 @@ const QuizPage: React.FC = () => {
   if (loading) return <Loader />;
   if (!!error?.error) return <Error {...error} />;
 
-  return <Quiz quiz={quiz} getQuizData={getQuizData} />;
+  return (
+    <Layout maxW={800}>
+      <Quiz quiz={quiz} getQuizData={getQuizData} />
+    </Layout>
+  );
 };
 
 export default QuizPage;

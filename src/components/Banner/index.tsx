@@ -1,8 +1,12 @@
 import { Box, Button, Container, Text, Image } from "@chakra-ui/react";
+import { HashLink } from "react-router-hash-link";
 
 const Banner: React.FC = () => {
   return (
-    <Box bg="linear-gradient(63deg, rgba(163,156,239,1) 0%, rgba(105,99,242,1) 100%)">
+    <Box
+      bg="linear-gradient(63deg, rgba(163,156,239,1) 0%, rgba(105,99,242,1) 100%)"
+      pt="48px"
+    >
       <Container
         display="flex"
         justifyContent="space-between"
@@ -34,7 +38,7 @@ const Banner: React.FC = () => {
             Choose a topic or enter your own, and let AI create questions for
             your quiz.
           </Text>
-          <a href="/#categories">
+          <HashLink to="/#categories">
             <Button
               bg="blue.900"
               mt={10}
@@ -48,7 +52,7 @@ const Banner: React.FC = () => {
             >
               Get Started
             </Button>
-          </a>
+          </HashLink>
         </Box>
         <Box w="100%" display={{ base: "block", lgDown: "none" }}>
           <Image

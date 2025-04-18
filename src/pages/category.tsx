@@ -3,7 +3,6 @@ import { pages } from "../common/data/categories";
 import PageNotFound from "../components/404";
 import {
   Box,
-  Button,
   Card,
   Collapsible,
   Container,
@@ -14,8 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { splitArray } from "../common/data/utils/splitArray";
 import { useEffect } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import LanguageSelect from "../components/LanguageSelect";
+import Layout from "../components/Layout";
 
 const Category: React.FC = () => {
   const location = useLocation();
@@ -35,15 +33,7 @@ const Category: React.FC = () => {
   if (!category) return <PageNotFound />;
 
   return (
-    <Box>
-      <Box as="header" w="100%" position="absolute">
-        <Container justifyContent="space-between" display="flex" py={3}>
-          <Button variant="ghost" size="2xl" p={0} h={5} minW={5}>
-            <GiHamburgerMenu color="#584db9" />
-          </Button>
-          <LanguageSelect />
-        </Container>
-      </Box>
+    <Layout>
       <Box bg="#584db9" h="100%">
         <Box
           bgImage={`url(${category.img})`}
@@ -125,7 +115,7 @@ const Category: React.FC = () => {
           </Flex>
         </Container>
       </Box>
-    </Box>
+    </Layout>
   );
 };
 
