@@ -1,6 +1,8 @@
 import { Button, CloseButton, Drawer, Flex, Portal } from "@chakra-ui/react";
 import { GrAppsRounded } from "react-icons/gr";
 import { HashLink } from "react-router-hash-link";
+import { routes } from "../../common/configs/routes";
+import React from "react";
 
 const Menu: React.FC = () => {
   return (
@@ -25,25 +27,14 @@ const Menu: React.FC = () => {
               <Drawer.Header></Drawer.Header>
               <Drawer.Body>
                 <Flex direction="column" fontSize="4xl" gap={10}>
-                  {/*@ts-ignore*/}
-                  <Drawer.Trigger as={HashLink} to="/">
-                    Home
-                  </Drawer.Trigger>
-                  {/*@ts-ignore*/}
-
-                  <Drawer.Trigger as={HashLink} to="/#payments">
-                    Payments
-                  </Drawer.Trigger>
-                  {/*@ts-ignore*/}
-
-                  <Drawer.Trigger as={HashLink} to="/#categories">
-                    Categories
-                  </Drawer.Trigger>
-                  {/*@ts-ignore*/}
-
-                  <Drawer.Trigger as={HashLink} to="/#generation">
-                    Generation
-                  </Drawer.Trigger>
+                  {routes.map((route) => (
+                    <React.Fragment key={route.link}>
+                      {/*@ts-ignore*/}
+                      <Drawer.Trigger as={HashLink} to={route.link}>
+                        {route.label}
+                      </Drawer.Trigger>
+                    </React.Fragment>
+                  ))}
                 </Flex>
               </Drawer.Body>
               <Drawer.CloseTrigger asChild>

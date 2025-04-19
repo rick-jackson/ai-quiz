@@ -1,9 +1,9 @@
 import { artTopics } from "../data/art";
 import { medicalTopics } from "../data/medicine";
-import { chemistryTopics } from "./chemistry";
-import { foodTopics } from "./food";
-import { geographyTopics } from "./geography";
-import { historyTopics } from "./history";
+import { chemistryTopics } from "../data/chemistry";
+import { foodTopics } from "../data/food";
+import { geographyTopics } from "../data/geography";
+import { historyTopics } from "../data/history";
 
 export const categories = [
   { name: "Art", icon: "./categories/art.png" },
@@ -92,7 +92,7 @@ export const pages: Record<
     topics: geographyTopics,
   },
   art: {
-    img: "/images/art.png",
+    img: "/images/art.webp",
     title: "Art",
     topics: artTopics,
   },
@@ -104,6 +104,16 @@ export const pages: Record<
   travel: {
     img: "/images/travel.png",
     title: "Travel",
+    topics: [],
+  },
+  economy: {
+    img: "/images/economy.png",
+    title: "Economy",
+    topics: [],
+  },
+  sport: {
+    img: "/images/sport.png",
+    title: "Sport",
     topics: [],
   },
   "philosopny-and-religion": {
