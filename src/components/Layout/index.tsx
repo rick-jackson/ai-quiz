@@ -1,12 +1,18 @@
-import { Box, BoxProps, Container } from "@chakra-ui/react";
+import { Box, BoxProps, Container, useBreakpointValue } from "@chakra-ui/react";
 import LanguageSelect from "../LanguageSelect";
 import Menu from "../Menu";
+import Navigation from "../Navigation";
 
 type LayoutProps = {
   children: React.ReactNode;
 } & BoxProps;
 
 const Layout: React.FC<LayoutProps> = ({ children, ...props }) => {
+  const isDekstop = useBreakpointValue({
+    md: "md",
+  });
+
+  console.log(isDekstop);
   return (
     <Box
       display="flex"
@@ -24,11 +30,11 @@ const Layout: React.FC<LayoutProps> = ({ children, ...props }) => {
           py={3}
           alignItems="center"
         >
-          <Menu />
+          {isDekstop ? <Navigation /> : <Menu />}
           <LanguageSelect />
         </Container>
       </Box>
-      <Box mx="auto" w="100%" h="100%">
+      <Box mx="auto" w="100%" h="100%" display="flex" flexDir="column">
         {children}
       </Box>
     </Box>

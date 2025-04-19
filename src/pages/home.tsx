@@ -9,7 +9,10 @@ const HomePage: React.FC = () => {
   return (
     <Layout>
       <Banner />
-      <Box bg="linear-gradient(186deg, rgba(113,89,228,1) 0%, rgba(102,79,224,1) 100%)">
+      <Box
+        bg="linear-gradient(186deg, rgba(113,89,228,1) 0%, rgba(102,79,224,1) 100%)"
+        flex={1}
+      >
         <HowItWorks />
         <Categories />
         <Form />

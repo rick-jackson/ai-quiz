@@ -45,7 +45,7 @@ const QuizPage: React.FC = () => {
   if (!!error?.error) return <Error {...error} />;
 
   return (
-    <Layout maxW={800}>
+    <Layout>
       <Quiz quiz={quiz} getQuizData={getQuizData} />
     </Layout>
   );

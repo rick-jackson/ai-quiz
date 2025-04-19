@@ -34,26 +34,48 @@ const Category: React.FC = () => {
 
   return (
     <Layout>
-      <Box bg="#584db9" h="100%">
-        <Box
-          bgImage={`url(${category.img})`}
-          bgSize="cover"
-          maxH="50vh"
-          backgroundPosition="center"
-          display="flex"
-          backgroundRepeat="no-repeat"
-          minH="35vh"
-          alignItems="flex-end"
-          boxShadow="inset 0px -150px 57px -85px rgba(88, 77, 185, 1)"
-          backgroundPositionY="top"
+      <Box
+        {...(!isMobile && { bgImage: `url(${category.img})` })}
+        h="100%"
+        bgRepeat="no-repeat"
+        bgSize={{ base: "contain", md: "cover" }}
+        backgroundPositionY="top"
+        backgroundPositionX="center"
+        backgroundAttachment="fixed"
+        px={{ base: 0, md: 4 }}
+      >
+        {isMobile && (
+          <Box
+            position="sticky"
+            top={0}
+            bgImage={`url(${category.img})`}
+            h="35vh"
+            bgSize="cover"
+          >
+            {/* <Image src={category.img} objectFit="cover" /> */}
+          </Box>
+        )}
+        <Container
+          pt={{ base: 0, md: 8 }}
+          pb={{ base: 4, md: 8 }}
+          mt={{ base: 0, md: 20 }}
+          mb={{ base: 0, md: 4 }}
+          boxShadow={{ mdDown: "0px -3px 20px 24px rgba(88, 77, 185, 1)" }}
+          bg={{ base: "#584db9", md: "#584db9ba" }}
+          borderRadius={{ base: 0, md: 20 }}
         >
-          <Container>
-            <Text textStyle="5xl" fontWeight={500}>
-              {category.title}
-            </Text>
-          </Container>
-        </Box>
-        <Container py={5}>
+          <Text
+            textStyle="5xl"
+            lineHeight={1}
+            fontWeight={500}
+            position={{ base: "sticky", md: "static" }}
+            top={0}
+            bg={{ base: "#584db9", md: "none" }}
+            zIndex={1}
+            pb={{ base: 4, md: 8 }}
+          >
+            {category.title}
+          </Text>
           <Flex justify="space-between" gap={10}>
             {splitArray(!isMobile ? 2 : 1, category.topics).map(
               (column, index) => (

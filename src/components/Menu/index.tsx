@@ -7,7 +7,7 @@ import React from "react";
 const Menu: React.FC = () => {
   return (
     <>
-      <Drawer.Root>
+      <Drawer.Root placement="start" size="full">
         <Drawer.Trigger>
           <Button
             variant="ghost"
